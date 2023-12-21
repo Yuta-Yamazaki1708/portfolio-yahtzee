@@ -1,0 +1,44 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - type: volume
+        source: mysql_volume
+        target: /var/lib/mysql
+    ports:
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
+
+  yahtzee:
+    container_name: yahtzee
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - type: bind
+        source: .
+        target: /yahtzee
+      - type: volume
+        source: bundle
+        target: /usr/local/bundle
+      - type: volume
+        source: vendor-bundle
+        target: /yahtzee/vendor/bundle
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mysql
+volumes:
+  mysql_volume:
+  bundle:
+  vendor-bundle:
