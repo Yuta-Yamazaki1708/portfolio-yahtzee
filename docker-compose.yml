@@ -27,9 +27,6 @@ services:
         source: .
         target: /yahtzee
       - type: volume
-        source: bundle
-        target: /usr/local/bundle
-      - type: volume
         source: vendor-bundle
         target: /yahtzee/vendor/bundle
     ports:
@@ -40,5 +37,4 @@ services:
       - mysql
 volumes:
   mysql_volume:
-  bundle:
   vendor-bundle:
