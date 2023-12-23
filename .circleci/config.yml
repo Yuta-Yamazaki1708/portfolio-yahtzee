@@ -56,10 +56,9 @@ jobs:
 workflows:
   test_and_deploy:
     jobs:
-      - rspec:
-      - rubocop:
+      - rspec
+      - rubocop
       - heroku_deploy:
           requires:
             - rspec
             - rubocop
-  
