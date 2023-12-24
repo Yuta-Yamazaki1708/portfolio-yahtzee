@@ -3,23 +3,35 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@2.1.0
   heroku: circleci/heroku@2.0.0
+  tests: zfhui/ruby-tests@0.0.2
 
 jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.2.2
+    working_directory: ~/yahtzee
+    steps:
+      - checkout
+      - ruby/install-deps
+
   rspec:
     working_directory: ~/yahtzee
     docker:
       - image: cimg/ruby:3.2.2
-    resource_class: small
+
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      RAILS_ENV: test
+    parallelism: 3
     steps:
       - checkout
-      - ruby/install:
-          version: ${RUBY_VERSION}
-      - run:
-          name: Start containers and verify it is working
-          command: |
-            set -x
-            docker-compose up -d
+      - setup_remote_docker:
+          version: 20.10.14
       - ruby/install-deps
+      - run:
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          name: Wait for DB
       - run:
           command: bundle exec rails db:schema:load --trace
           name: Database setup
@@ -32,8 +44,6 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - ruby/install:
-          version: ${RUBY_VERSION}
       - ruby/install-deps
       - ruby/rubocop-check:
           parallel: true
@@ -56,8 +66,13 @@ jobs:
 workflows:
   test_and_deploy:
     jobs:
-      - rspec
-      - rubocop
+      - build
+      - rspec:
+          requires:
+            - build
+      - rubocop:
+          requires:
+            - build
       - heroku_deploy:
           requires:
             - rspec
