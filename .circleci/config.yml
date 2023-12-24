@@ -20,8 +20,6 @@ jobs:
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: yahtzee_test
-          MYSQL_USER: root
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
