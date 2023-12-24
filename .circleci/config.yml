@@ -29,9 +29,6 @@ jobs:
           version: 20.10.14
       - ruby/install-deps
       - run:
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-          name: Wait for DB
-      - run:
           command: bundle exec rails db:schema:load --trace
           name: Database setup
       - ruby/rspec-test
