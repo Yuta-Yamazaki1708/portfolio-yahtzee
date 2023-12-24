@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@2.1.0
   heroku: circleci/heroku@2.0.0
-  tests: zfhui/ruby-tests@0.0.2
 
 jobs:
   build:
