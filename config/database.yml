@@ -55,3 +55,4 @@ production:
   database: yahtzee_production
   username: yahtzee
   password: <%= ENV["YAHTZEE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
