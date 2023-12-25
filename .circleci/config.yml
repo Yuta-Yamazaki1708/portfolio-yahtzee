@@ -17,6 +17,7 @@ jobs:
     working_directory: ~/yahtzee
     docker:
       - image: cimg/ruby:3.2.2
+      - image: cimg/node:21.4.0
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
