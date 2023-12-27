@@ -3,10 +3,6 @@ ARG RUBYGEMS_VERSION=3.3.20
 
 WORKDIR /yahtzee
 
-RUN apt-get update \
-  && apt-get install -y \
-    nodejs
-
 COPY Gemfile Gemfile.lock /yahtzee/
 
 RUN bundle install
