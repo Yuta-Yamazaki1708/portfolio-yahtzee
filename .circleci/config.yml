@@ -35,6 +35,7 @@ jobs:
           name: Wait for DB
       - run:
           command: |
+            mv config/database.yml.ci config/database.yml
             bundle exec rails db:create
             bundle exec rails db:schema:load --trace
           name: Database setup
