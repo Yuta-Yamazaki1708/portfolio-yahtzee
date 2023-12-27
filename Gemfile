@@ -57,6 +57,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'rubocop-airbnb'
   gem 'capybara'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
