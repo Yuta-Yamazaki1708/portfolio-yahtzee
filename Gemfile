@@ -56,6 +56,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 6.1.0'
   gem 'rubocop-airbnb'
+  gem 'capybara'
 end
 
 group :development do
