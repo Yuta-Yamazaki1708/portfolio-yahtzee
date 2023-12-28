@@ -10,6 +10,10 @@
         <li><a href="resume.html">Game</a></li>
         <li><a href="services.html">Ranking</a></li>
         <li><a href="portfolio.html">Login</a></li>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% if user_signed_in? %>
+          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <% end %>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

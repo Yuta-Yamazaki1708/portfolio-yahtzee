@@ -1,0 +1,12 @@
+.contact .user-form .sign-up {
+  background: #34b7a7;
+  border: 0;
+  padding: 10px 30px 12px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .user-form .sign-up:hover {
+  background: #3dc8b7;
+}
