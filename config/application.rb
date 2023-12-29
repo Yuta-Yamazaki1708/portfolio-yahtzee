@@ -33,5 +33,7 @@ module Yahtzee
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.active_storage.variant_processor = :vips
   end
 end
