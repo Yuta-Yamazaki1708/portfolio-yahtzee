@@ -1,26 +1,34 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+<% content_for :css do %>
+  <%= stylesheet_link_tag 'registration' %>
 <% end %>
 
-<%= render "users/shared/links" %>
+<main id="main">
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>ログイン</h2>
+      </div>
+      <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8 mt-5 mt-lg-0">
+          <%= form_with model: @user, url: user_session_path, id: 'new_user', class: "user-form", method: :post do |f|  %>
+            <%= render "users/shared/error_messages"%>
+            <div class="row">
+              <div class="form-group mt-3 mt-md-0">
+                <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
+            </div>
+            <div class="row text-center justify-content-center">
+              <%= f.submit "ログイン", class: "sign-up col-md-6 col-xs-10" %>
+              <span>または</span>
+              <button class="sign-up col-md-6 col-xs-10 mb-10">Googleアカウントでログイン</button>
+              <%= link_to "新規登録", new_user_registration_path %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
