@@ -10,6 +10,7 @@
         <li><a href="resume.html">Game</a></li>
         <li><a href="services.html">Ranking</a></li>
         <% if user_signed_in? %>
+          <%=image_tag current_user.icon.variant(:thumb) %>
           <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "ログイン", new_user_session_path%></li>

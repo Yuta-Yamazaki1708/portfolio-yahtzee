@@ -1,6 +1,8 @@
 FROM ruby:3.2.2
 ARG RUBYGEMS_VERSION=3.3.20
 
+RUN apt-get update && apt-get install -y libvips42
+
 WORKDIR /yahtzee
 
 COPY Gemfile Gemfile.lock /yahtzee/
