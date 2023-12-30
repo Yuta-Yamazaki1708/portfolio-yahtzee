@@ -1,13 +1,17 @@
+<% content_for :css do %>
+  <%= stylesheet_link_tag "home" %>
+<% end %>
+
 <section id="hero" class="d-flex align-items-center">
   <div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
     <h1>Yahtzee</h1>
     <div class="text-center">
       <% if user_signed_in? %>
-        <%= link_to "プレイする", root_path , class: "btn-about" %>
+        <%= link_to "プレイする", root_path , class: "btn-link" %>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn-about col-6"%>
-        <a href="about.html" class="btn-about col-6">ゲストログイン</a>
-        <%= link_to "プレイする", root_path , class: "btn-about col-6" %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6"%>
+        <a href="about.html" class="btn-link col-6">ゲストログイン</a>
+        <%= link_to "プレイする", root_path , class: "btn-link col-6" %>
       <% end %>
     </div>
   </div>

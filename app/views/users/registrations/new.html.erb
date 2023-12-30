@@ -29,7 +29,7 @@
             <div class="row text-center justify-content-center">
               <%= f.submit "新規登録", class: "submit-btn col-md-6 col-xs-10" %>
               <span>または</span>
-              <button class="submit-btn col-md-6 col-xs-10">Googleアカウントでログイン</button>
+              <%= link_to "Googleアカウントでログイン", root_path, class: "btn-link col-md-6 col-xs-10" %>
               <%= link_to "ログイン", new_user_session_path %>
             </div>
           <% end %>
