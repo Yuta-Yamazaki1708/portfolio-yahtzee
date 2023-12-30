@@ -190,7 +190,7 @@ h6 {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: 14px;
+  right: 0px;
   top: calc(100% + 30px);
   margin: 0;
   padding: 10px 0;
@@ -439,7 +439,7 @@ section {
   padding: 12px 40px;
   border-radius: 50px;
   transition: 0.5s;
-  margin-top: 30px;
+  margin: 10px 0;
   color: #fff;
   background: #34b7a7;
 }
