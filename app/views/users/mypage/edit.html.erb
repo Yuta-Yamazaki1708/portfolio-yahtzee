@@ -10,7 +10,7 @@
       </div>
       <div class="row mt-5 justify-content-center">
         <div class="col-lg-8 mt-5 mt-lg-0">
-          <%= form_with model: @user, url: mypage_update_path, class: "user-form", method: :patch do |f|  %>
+          <%= form_with model: current_user, url: mypage_update_path, class: "user-form", method: :patch do |f|  %>
             <div class="row">
               <div class="col-md-6 form-group">
                 <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", placeholder: "アカウント名" %>
