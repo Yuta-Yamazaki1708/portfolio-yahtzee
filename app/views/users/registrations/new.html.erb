@@ -1,5 +1,5 @@
 <% content_for :css do %>
-  <%= stylesheet_link_tag 'registration' %>
+  <%= stylesheet_link_tag 'form' %>
 <% end %>
 
 <main id="main">
@@ -27,9 +27,9 @@
               <%= f.password_field :password_confirmation, class: "form-control", placeholder: "パスワード確認" %>
             </div>
             <div class="row text-center justify-content-center">
-              <%= f.submit "新規登録", class: "sign-up col-md-6 col-xs-10" %>
+              <%= f.submit "新規登録", class: "submit-btn col-md-6 col-xs-10" %>
               <span>または</span>
-              <button class="sign-up col-md-6 col-xs-10">Googleアカウントでログイン</button>
+              <button class="submit-btn col-md-6 col-xs-10">Googleアカウントでログイン</button>
               <%= link_to "ログイン", new_user_session_path %>
             </div>
           <% end %>

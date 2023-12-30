@@ -1,5 +1,5 @@
 <% content_for :css do %>
-  <%= stylesheet_link_tag 'registration' %>
+  <%= stylesheet_link_tag 'form' %>
 <% end %>
 
 <main id="main">
@@ -19,7 +19,9 @@
             <div class="form-group mt-3">
               <%= f.file_field :icon, class: "form-control" %>
             </div>
-              <%= f.submit "編集を完了", class: "sign-up col-md-6 col-xs-10" %>
+            <div class="row text-center justify-content-center">
+              <%= f.submit "編集を完了", class: "submit-btn col-md-6 col-xs-10" %>
+              <%= link_to "戻る", :back %>
             </div>
           <% end %>
         </div>
