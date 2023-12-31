@@ -10,7 +10,7 @@
         <%= link_to "プレイする", root_path , class: "btn-link" %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6"%>
-        <a href="about.html" class="btn-link col-6">ゲストログイン</a>
+        <%= link_to "ゲストログイン", guest_sign_in_path, data: {"turbo-method": :post}, class: "btn-link col-6" %>
         <%= link_to "プレイする", root_path , class: "btn-link col-6" %>
       <% end %>
     </div>

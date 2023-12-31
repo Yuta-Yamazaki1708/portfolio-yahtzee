@@ -11,4 +11,12 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validates :password, presence: true, on: :create
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = "ゲスト"
+      user.icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.jpg')), filename: 'icon.jpg')
+    end
+  end
 end
