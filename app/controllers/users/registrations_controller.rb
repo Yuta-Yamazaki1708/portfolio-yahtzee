@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_user!, only: [:show, :edit, :update]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -39,6 +40,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  def show_profile
+  end
+
+  def edit_profile
+  end
+
+  def update_profile
+    if current_user.update(profile_params)
+      redirect_to profile_path(current_user)
+    else
+      render action: :edit_profile
+    end
+  end
+
+  def account
+  end
+
+  private
+
+  def profile_params
+    params.require(:user).permit(:username, :icon)
+  end
 
   # protected
 

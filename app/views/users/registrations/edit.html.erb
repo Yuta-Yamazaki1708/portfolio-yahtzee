@@ -1,43 +1,38 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<% content_for :css do %>
+  <%= stylesheet_link_tag 'form' %>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+<main id="main">
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>アカウント設定</h2>
+      </div>
+      <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8 mt-5 mt-lg-0">
+          <%= form_with model: current_user, url: user_registration_path, class: "user-form", method: :patch do |f|  %>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "新しいパスワード 変更しない場合は空欄" %>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "パスワード確認 変更しない場合は空欄" %>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" ,placeholder: "現在のパスワード 必須" %>
+            </div>
+            <div class="row text-center justify-content-center">
+              <%= f.submit "更新する", class: "submit-btn col-md-6 col-xs-10" %>
+              <%= link_to "戻る", :back %>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "退会する", user_registration_path, data: { confirm: "本当に退会しますか？この操作は取り消せません。", turbo_confirm: "本当に退会しますか？この操作は取り消せません。", "turbo-method": :delete }, class: "text-center cancel-account-btn col-12 col-md-6 mt-3" %></div>
+      </div>
+    </div>
+  </section>
+</main>

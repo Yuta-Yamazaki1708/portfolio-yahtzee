@@ -13,8 +13,8 @@
           <li class="dropdown">
             <a href="#"><%= image_tag(current_user.icon.variant(:thumb), class: "icon", alt: "アイコン") %></a>
             <ul>
-              <li><%= link_to "マイページ", mypage_path(current_user) %></li>
-              <li><%= link_to "アカウント設定", root_path %></li>
+              <li><%= link_to "マイページ", profile_path(current_user) %></li>
+              <li><%= link_to "アカウント設定", edit_user_registration_path %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, data: { "turbo-method": :delete } %></li>
             </ul>
           </li>

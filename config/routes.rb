@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   root "home#index"
-  get "/user/mypage/:id", to: "users/mypage#show", as: "mypage"
-  get "/user/mypage/edit/:id", to: "users/mypage#edit", as: "mypage_edit"
-  patch "user/mypage/update", to: "users/mypage#update", as:"mypage_update"
+  
+  devise_scope :user do
+    get "/user/profile/:id", to: "users/registrations#show_profile", as: "profile"
+    get "/user/edit_profile/:id", to: "users/registrations#edit_profile", as: "edit_profile"
+    patch "user/updatep_profile/id", to: "users/registrations#update_profile", as: "update_profile"
+  end
+  
 
 end

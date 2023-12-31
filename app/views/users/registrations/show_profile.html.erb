@@ -4,6 +4,9 @@
 
 <main id="main">
   <section>
+    <div class="section-title">
+      <h2>プロフィール</h2>
+    </div>
     <div class="container mypage">
       <div class="row">
         <div class="profile col-12 col-lg-5">
@@ -16,7 +19,7 @@
               <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong> 123 </li>
               <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong> 123</li>
             </ul>
-            <%= link_to "プロフィール編集", mypage_edit_path(current_user), class: "col-10 col-lg-6 text-center" %>
+            <%= link_to "プロフィール編集", edit_profile_path(current_user), class: "col-10 col-lg-6 text-center" %>
           </div>
         </div>
         <div class=" col-12 col-lg-6 result">

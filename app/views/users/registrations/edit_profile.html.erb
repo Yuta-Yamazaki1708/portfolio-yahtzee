@@ -10,13 +10,14 @@
       </div>
       <div class="row mt-5 justify-content-center">
         <div class="col-lg-8 mt-5 mt-lg-0">
-          <%= form_with model: current_user, url: mypage_update_path, class: "user-form", method: :patch do |f|  %>
+          <%= form_with model: current_user, url: update_profile_path(current_user), class: "user-form", method: :patch do |f|  %>
             <div class="row">
               <div class="col-md-6 form-group">
                 <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", placeholder: "アカウント名" %>
               </div>
             </div>
             <div class="form-group mt-3">
+            <%= f.label "アイコン画像" %>
               <%= f.file_field :icon, class: "form-control" %>
             </div>
             <div class="row text-center justify-content-center">
