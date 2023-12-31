@@ -11,6 +11,4 @@ Rails.application.routes.draw do
     patch "user/updatep_profile/id", to: "users/registrations#update_profile", as: "update_profile"
     post "user/guest_sign_in", to: "users/sessions#guest_sign_in", as: "guest_sign_in"
   end
-  
-
 end

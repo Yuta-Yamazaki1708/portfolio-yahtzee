@@ -12,8 +12,11 @@
         <div class="col-lg-8 mt-5 mt-lg-0">
           <%= form_with model: current_user, url: update_profile_path(current_user), class: "user-form", method: :patch do |f|  %>
             <div class="row">
-              <div class="col-md-6 form-group">
+              <div class="form-group">
                 <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", placeholder: "アカウント名" %>
+                <% if current_user.errors.include?(:username) %>
+                  <p style="color: red;"><%= current_user.errors.full_messages_for(:username).first %></p>
+                <% end %>
               </div>
             </div>
             <div class="form-group mt-3">
@@ -22,7 +25,7 @@
             </div>
             <div class="row text-center justify-content-center">
               <%= f.submit "編集を完了", class: "submit-btn col-md-6 col-xs-10" %>
-              <%= link_to "戻る", :back %>
+              <%= link_to "戻る", profile_path(current_user) %>
             </div>
           <% end %>
         </div>

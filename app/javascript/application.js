@@ -81,6 +81,14 @@ import "controllers"
   /**
    * Mobile nav toggle
    */
+  document.addEventListener('turbo:render', function() {
+    on('click', '.mobile-nav-toggle', function(e) {
+      select('#navbar').classList.toggle('navbar-mobile')
+      this.classList.toggle('bi-list')
+      this.classList.toggle('bi-x')
+    })
+  })
+
   document.addEventListener('turbo:load', function() {
     on('click', '.mobile-nav-toggle', function(e) {
       select('#navbar').classList.toggle('navbar-mobile')
