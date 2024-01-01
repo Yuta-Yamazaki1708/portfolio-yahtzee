@@ -26,9 +26,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def account
-  end
-
   private
 
   def profile_params
@@ -37,7 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to root_path
+      redirect_to profile_path(current_user)
     end
   end
 end

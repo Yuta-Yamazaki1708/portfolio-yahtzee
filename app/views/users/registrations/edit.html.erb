@@ -37,7 +37,7 @@
                 <p style="color: red;"><%= @user.errors.full_messages_for(:current_password).first %>
               <% end %>
             </div>
-            <div class="row text-center justify-content-center">
+            <div class="row text-center justify-content-center" data-turbo="true">
               <%= f.submit "更新する", class: "submit-btn col-md-6 col-xs-10" %>
               <%= link_to "戻る", root_path %>
               <%= link_to "退会する", user_registration_path, data: { confirm: "本当に退会しますか？この操作は取り消せません。", turbo_confirm: "本当に退会しますか？この操作は取り消せません。", "turbo-method": :delete }, class: "text-center cancel-account-btn col-xs-10 col-md-6 mt-3" %></div>

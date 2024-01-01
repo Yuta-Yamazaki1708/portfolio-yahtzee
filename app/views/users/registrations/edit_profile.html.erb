@@ -1,13 +1,8 @@
-<% content_for :css do %>
-  <%= stylesheet_link_tag 'form' %>
-<% end %>
 
+<%=turbo_frame_tag "form" do%>
 <main id="main">
   <section id="contact" class="contact">
     <div class="container">
-      <div class="section-title">
-        <h2>プロフィール編集</h2>
-      </div>
       <div class="row mt-5 justify-content-center">
         <div class="col-lg-8 mt-5 mt-lg-0">
           <%= form_with model: current_user, url: update_profile_path(current_user), class: "user-form", method: :patch do |f|  %>
@@ -27,8 +22,8 @@
                 <% end %>
             </div>
             <div class="row text-center justify-content-center">
-              <%= f.submit "編集を完了", class: "submit-btn col-md-6 col-xs-10" %>
-              <%= link_to "戻る", profile_path(current_user) %>
+              <%= f.submit "編集を完了", class: "submit-btn col-md-8 col-xs-10" %>
+              <%= link_to "戻る", profile_path(current_user), class: "col-md-8 col-xs-10" %>
             </div>
           <% end %>
         </div>
@@ -36,5 +31,6 @@
     </div>
   </section>
 </main>
+<%end%>
 
 

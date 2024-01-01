@@ -11,8 +11,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validates :password, presence: true, on: :create
-  validate :icon_file_validation
-  validates :icon, presence: true
+  validate :icon_file_validation, if: :icon_attached?
+
+  def icon_attached?
+    icon.attached?
+  end
 
   def icon_file_validation
     unless icon.blob.content_type.in?(%('image/jpg, image/jpeg, image/png'))

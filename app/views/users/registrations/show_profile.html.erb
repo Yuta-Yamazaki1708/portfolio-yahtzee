@@ -1,5 +1,6 @@
 <% content_for :css do %>
   <%= stylesheet_link_tag "mypage" %>
+  <%= stylesheet_link_tag "turbo_form" %>
 <% end %>
 
 <main id="main">
@@ -10,17 +11,19 @@
     <div class="container mypage">
       <div class="row">
         <div class="profile col-12 col-lg-5">
-          <div class="text-center">
-            <%= image_tag current_user.icon.variant(:display), class: "icon", alt: "アイコン" %>
-          </div>
-          <div class="row justify-content-center">
-            <ul class="text-center">
-              <li><i class="bi bi-rounded-right"></i> <strong>アカウント名:</strong><%= current_user.username %></li>
-              <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong> 123 </li>
-              <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong> 123</li>
-            </ul>
-            <%= link_to "プロフィール編集", edit_profile_path(current_user), class: "col-10 col-lg-6 text-center" %>
-          </div>
+          <%=turbo_frame_tag "form" do%>
+            <div class="text-center">
+              <%= image_tag current_user.icon.variant(:display), class: "icon", alt: "アイコン" %>
+            </div>
+            <div class="row justify-content-center">
+              <ul class="text-center">
+                <li><i class="bi bi-rounded-right"></i> <strong>アカウント名:</strong><%= current_user.username %></li>
+                <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong> 123 </li>
+                <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong> 123</li>
+              </ul>
+              <%= link_to "プロフィール編集", edit_profile_path(current_user), class: "col-10 col-lg-6 text-center" %>
+            </div>
+          <% end %>
         </div>
         <div class=" col-12 col-lg-6 result">
           <h2>Result Keep</h2>
