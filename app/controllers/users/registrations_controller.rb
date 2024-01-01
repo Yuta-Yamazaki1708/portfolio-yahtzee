@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if current_user.update(profile_params)
       redirect_to profile_path(current_user)
     else
-      render action: :edit_profile
+      render action: :edit_profile, status: :unprocessable_entity
     end
   end
 

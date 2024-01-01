@@ -11,6 +11,16 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validates :password, presence: true, on: :create
+  validate :icon_file_validation
+  validates :icon, presence: true
+
+  def icon_file_validation
+    unless icon.blob.content_type.in?(%('image/jpg, image/jpeg, image/png'))
+      icon.purge
+      icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.jpg')), filename: 'icon.jpg')
+      errors.add(:icon, "はjpg,jpeg,png形式でアップロードしてください。")
+    end
+  end
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
