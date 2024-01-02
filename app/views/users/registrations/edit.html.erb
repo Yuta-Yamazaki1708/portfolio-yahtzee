@@ -9,8 +9,8 @@
         <h2>アカウント設定</h2>
       </div>
       <div class="row mt-5 justify-content-center">
-        <div class="col-lg-8 mt-5 mt-lg-0">
-          <%= form_with model: current_user, url: user_registration_path, class: "user-form" do |f|  %>
+        <div class="col-lg-8 mt-5 mt-lg-0" data-turbo="true">
+          <%= form_with model: current_user, url: user_registration_path, class: "user-form", data: { "turbo-method": :patch } do |f|  %>
             <div class="row">
               <div class="form-group">
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
@@ -38,7 +38,7 @@
               <% end %>
             </div>
             <div class="row text-center justify-content-center" data-turbo="true">
-              <%= link_to "更新する", user_registration_path, data: { "turbo-method": :patch }, class: "text-center btn-link col-xs-10 col-md-6 mt-3" %>
+              <%= f.submit "更新する",class: "text-center submit-btn col-xs-10 col-md-6 mt-3" %>
               <%= link_to "戻る", root_path %>
               <%= link_to "退会する", user_registration_path, data: { turbo_confirm: "本当に退会しますか？この操作は取り消せません。", "turbo-method": :delete }, class: "text-center cancel-account-btn col-xs-10 col-md-6 mt-3" %></div>
             </div>
