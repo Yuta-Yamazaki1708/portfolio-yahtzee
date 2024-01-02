@@ -106,15 +106,18 @@
 
 .cancel-account-btn {
   background: #ed3c0d;
-  border: 0;
-  margin-bottom: 10px;
-  padding: 10px 30px 12px 30px;
-  color: #fff;
-  transition: 0.4s;
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 40px;
   border-radius: 50px;
+  transition: 0.5s;
+  margin: 10px 0;
+  color: #fff;
 }
 
 .cancel-account-btn:hover {
-  background-color: #ee7c5c;
+  background: #ee7c5c;
   color: #fff;
 }

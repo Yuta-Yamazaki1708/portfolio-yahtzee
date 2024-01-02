@@ -11,9 +11,7 @@
         <li><a href="services.html">Ranking</a></li>
         <% if user_signed_in? %>
           <li class="dropdown">
-            <div id="icon">
-              <a href="#"><%= image_tag(current_user.icon.variant(:thumb), class: "icon", alt: "アイコン") %></a>
-            </div>
+              <a href="#"><%= image_tag(current_user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %></a>
             <ul>
               <li><%= link_to "マイページ", profile_path(current_user) %></li>
               <li><%= link_to "アカウント設定", edit_user_registration_path %></li>

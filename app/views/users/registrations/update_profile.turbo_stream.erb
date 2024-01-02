@@ -2,8 +2,8 @@
 <%= render "profile" %>
 <% end %>
 
-<%= turbo_stream.update "icon" do %>
+<%= turbo_stream.replace "icon" do %>
   <a href="#"><%= image_tag(current_user.icon.variant(:thumb), class: "icon", alt: "アイコン") %></a>
 <% end %>
 
-
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

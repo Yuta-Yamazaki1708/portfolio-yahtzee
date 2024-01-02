@@ -20,6 +20,10 @@
 
     <%= yield %>
 
+    <div id="flash">
+      <%= render partial: "shared/flash" %>
+    </div>
+
     <%= render "shared/footer" %>
 
     <%= javascript_include_tag "aos" %>

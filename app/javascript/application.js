@@ -13,6 +13,7 @@ import "controllers"
 * License: https://bootstrapmade.com/license/
 */
 (function() {
+  Turbo.session.drive = false;
   "use strict";
 
   /**

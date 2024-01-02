@@ -10,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       resource.icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.jpg')), filename: 'icon.jpg')
     end
+    flash.notice = "新規登録が完了しました。"
   end
 
   def show_profile
@@ -20,9 +21,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_profile
     if current_user.update(profile_params)
+      flash.now.notice = "プロフィールを更新しました。"
+      render "update_profile"
     else
       render action: :edit_profile, status: :unprocessable_entity
     end
+  end
+
+  def update
+    super
+    flash.notice = "アカウント設定を更新しました。"
+  end
+
+  def destroy
+    super
+    flash.notice = "退会が完了しました。"
   end
 
   private
@@ -33,7 +46,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to profile_path(current_user)
+      flash.now.alert = "ゲストユーザーは編集、退会ができません。"
+      render "ensure_guest_user", formats: :turbo_stream
     end
   end
 end
