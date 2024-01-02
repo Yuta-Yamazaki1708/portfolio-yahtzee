@@ -1,0 +1,9 @@
+<%= turbo_stream.replace current_user do %>
+<%= render "profile" %>
+<% end %>
+
+<%= turbo_stream.update "icon" do %>
+  <a href="#"><%= image_tag(current_user.icon.variant(:thumb), class: "icon", alt: "アイコン") %></a>
+<% end %>
+
+
