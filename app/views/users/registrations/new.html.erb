@@ -39,11 +39,13 @@
             </div>
             <div class="row text-center justify-content-center">
               <%= f.submit "新規登録", class: "submit-btn col-md-6 col-xs-10" %>
-              <span>または</span>
-              <%= link_to "Googleアカウントでログイン", root_path, class: "btn-link col-md-6 col-xs-10" %>
-              <%= link_to "ログインはこちら", new_user_session_path %>
             </div>
           <% end %>
+          <div class="row text-center justify-content-center">
+              <span>または</span>
+              <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn-link col-md-6 col-12"%>
+              <%= link_to "ログインはこちら", new_user_session_path %>
+          </div>
         </div>
       </div>
     </div>

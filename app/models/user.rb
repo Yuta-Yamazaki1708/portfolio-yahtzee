@@ -1,8 +1,10 @@
+require 'open-uri'
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_one_attached :icon do |attachable|
     attachable.variant :thumb, resize_to_fill: [50, 50]
@@ -30,6 +32,17 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.username = "ゲスト"
       user.icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.jpg')), filename: 'icon.jpg')
+    end
+  end
+
+  def self.from_omniauth(access_token)
+    find_or_create_by(provider: access_token.provider, uid: access_token.uid) do |user|
+      user.email = access_token.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.username = access_token.info.name
+      image_url = access_token.info.image
+      image_io = URI.open(image_url)
+      user.icon.attach(io: image_io, filename: 'icon.jpg')
     end
   end
 end
