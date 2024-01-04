@@ -30,7 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     super
-    flash.notice = "アカウント設定を更新しました。"
+    if current_user.update(account_params)
+      flash.notice = "アカウント設定を更新しました。"
+    end
   end
 
   def destroy
@@ -42,6 +44,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def profile_params
     params.require(:user).permit(:username, :icon)
+  end
+
+  def account_params
+    params.require(:user).permit(:email, :password)
   end
 
   def ensure_guest_user
