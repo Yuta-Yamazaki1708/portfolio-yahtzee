@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.2.2-node
+      - image: cimg/ruby:3.2.2
     working_directory: ~/yahtzee
     steps:
       - checkout
@@ -16,7 +16,7 @@ jobs:
   rspec:
     working_directory: ~/yahtzee
     docker:
-      - image: cimg/ruby:3.2.2-node
+      - image: cimg/ruby:3.2.2
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
@@ -41,7 +41,8 @@ jobs:
             bundle exec rails db:create
             bundle exec rails db:schema:load --trace
           name: Database setup
-      - ruby/rspec-test
+      - ruby/rspec-test:
+          include: spec/**/*_spec.rb
 
   rubocop:
     working_directory: ~/yahtzee
