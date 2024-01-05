@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.3.0-node
+      - image: cimg/ruby:3.2.2-node
     working_directory: ~/yahtzee
     steps:
       - checkout
@@ -16,7 +16,7 @@ jobs:
   rspec:
     working_directory: ~/yahtzee
     docker:
-      - image: cimg/ruby:3.3.0-node
+      - image: cimg/ruby:3.3.2-node
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
