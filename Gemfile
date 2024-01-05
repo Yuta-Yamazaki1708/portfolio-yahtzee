@@ -64,6 +64,7 @@ group :development, :test do
   gem 'rubocop-airbnb'
   gem 'capybara'
   gem 'rspec_junit_formatter'
+  gem 'selenium-webdriver'
 end
 
 group :development do
