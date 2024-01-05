@@ -35,9 +35,9 @@ services:
     depends_on:
       - mysql
 
-  selenium-chrome:
+  chrome:
     container_name: chrome
-    image: selenium/standalone-chrome:120.0
+    image: seleniarm/standalone-chromium:120.0
     ports:
       - 4444:4444
     shm_size: 2g
