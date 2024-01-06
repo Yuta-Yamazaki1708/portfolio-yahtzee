@@ -16,13 +16,11 @@ jobs:
   rspec:
     working_directory: ~/yahtzee
     docker:
-      - image: cimg/ruby:3.2.2
+      - image: cimg/ruby:3.2.2-browsers
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_ROOT_HOST: 127.0.0.1
-      - image: selenium/standalone-chrome:120.0
-        name: chrome
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
@@ -38,10 +36,11 @@ jobs:
           name: Wait for DB
       - run:
           command: |
-            mv config/database.yml.ci config/database.yml
-            bundle exec rails db:create
-            bundle exec rails db:schema:load --trace
+            mv spec/support/capybara.rb.ci spec/support/capybara.rb
           name: Database setup
+      - run:
+          command: |
+            mv config/database.yml.ci config/database.yml
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 
