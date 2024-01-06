@@ -20,8 +20,6 @@ jobs:
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
-      - image: selenium/standalone-chrome-debug:latest
-        name: chrome
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
