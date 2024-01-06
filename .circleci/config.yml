@@ -17,9 +17,11 @@ jobs:
     working_directory: ~/yahtzee
     docker:
       - image: cimg/ruby:3.2.2
+          DB_HOST: 127.0.0.1
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_HOST: 127.0.0.1
       - image: selenium/standalone-chrome:120.0
         name: chrome
     environment:
