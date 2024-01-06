@@ -1,5 +1,5 @@
 Capybara.register_driver :remote_chrome do |app|
-  url = 'http://chrome:4444/wd/hub'
+  url = "tcp://chrome:4444/wd/hub"
   options = Selenium::WebDriver::Options.chrome
   Capybara::Selenium::Driver.new(app, browser: :remote, url: url, options: options)
 end
