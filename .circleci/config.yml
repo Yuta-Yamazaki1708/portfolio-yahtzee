@@ -36,11 +36,14 @@ jobs:
           name: Wait for DB
       - run:
           command: |
-            mv spec/support/capybara.rb.ci spec/support/capybara.rb
+            mv config/database.yml.ci config/database.yml
+            bundle exec rails db:create
+            bundle exec rails db:schema:load --trace
           name: Database setup
       - run:
           command: |
-            mv config/database.yml.ci config/database.yml
+            mv spec/support/capybara.rb.ci spec/support/capybara.rb
+          name: capybara config
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 
