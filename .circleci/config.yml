@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.2.2-browsers
+      - image: cimg/ruby:3.2.2
     working_directory: ~/yahtzee
     steps:
       - checkout
@@ -16,10 +16,12 @@ jobs:
   rspec:
     working_directory: ~/yahtzee
     docker:
-      - image: cimg/ruby:3.2.2-browsers
+      - image: cimg/ruby:3.2.2
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
+      - image: selenium/standalone-chrome:120.0
+        name: chrome
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
