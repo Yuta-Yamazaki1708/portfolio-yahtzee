@@ -125,6 +125,11 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.9.1)
+    factory_bot (6.4.5)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faraday (2.8.1)
       base64
       faraday-net_http (>= 2.0, < 3.1)
@@ -392,6 +397,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   execjs
+  factory_bot_rails
   image_processing (~> 1.2)
   importmap-rails
   jquery-rails

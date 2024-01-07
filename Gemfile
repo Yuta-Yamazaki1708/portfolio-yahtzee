@@ -61,6 +61,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 6.1.0'
+  gem 'factory_bot_rails'
   gem 'rubocop-airbnb'
   gem 'capybara'
   gem 'rspec_junit_formatter'

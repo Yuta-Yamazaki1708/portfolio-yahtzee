@@ -10,7 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       resource.icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.jpg')), filename: 'icon.jpg')
     end
-    flash.notice = "新規登録が完了しました。"
+    if resource.save
+      flash.notice = "新規登録が完了しました。"
+    end
   end
 
   def show_profile
