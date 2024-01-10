@@ -32,6 +32,10 @@ jobs:
           version: 20.10.14
       - ruby/install-deps
       - run:
+        command: |
+          mkdir -p /var/lib/apt/lists/partial
+          chmod 644 /var/lib/apt/lists/*
+      - run:
           command: apt-get update && apt-get install -y libvips42
           name: install libvips
       - run:
