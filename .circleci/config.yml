@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - run:
-          command: bundle install
-          name: Install gems
 
   rspec:
     working_directory: ~/yahtzee
@@ -34,6 +31,9 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - ruby/install-deps
+      - run:
+          command: bundle install
+          name: Install gems
       - run:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
           name: Wait for DB
