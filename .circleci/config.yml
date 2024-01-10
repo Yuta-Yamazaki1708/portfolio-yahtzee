@@ -32,8 +32,8 @@ jobs:
           version: 20.10.14
       - ruby/install-deps
       - run:
-          command: bundle install
-          name: Install gems
+          command: apt-get update && apt-get install -y libvips42
+          name: install libvips
       - run:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
           name: Wait for DB
