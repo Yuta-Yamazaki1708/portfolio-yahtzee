@@ -41,9 +41,11 @@ class User < ApplicationRecord
       user.email = access_token.info.email
       user.password = Devise.friendly_token[0, 20]
       user.username = access_token.info.name
-      image_url = access_token.info.image
-      image_io = URI.open(image_url)
-      user.icon.attach(io: image_io, filename: 'icon.jpg')
+      if access_token.info.image
+        image_url = access_token.info.image
+        image_io = URI.open(image_url)
+        user.icon.attach(io: image_io, filename: 'icon.jpg')
+      end
     end
   end
 end

@@ -66,9 +66,21 @@ RSpec.describe User, type: :model do
   end
 
   describe "クラスメソッドテスト" do
+    before do
+      Rails.application.env_config["devise.mapping"] = Devise.mappings[:google_user]
+      Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+    end
+
     it "guestメソッドが有効であること" do
       guest_user = User.guest
       expect(guest_user).to be_valid
+    end
+
+    it "from_omniauthメソッドが有効であること" do
+      access_token = OmniAuth.config.mock_auth[:google_oauth2]
+      sleep 10
+      user = User.from_omniauth(access_token)
+      expect(user).to be_valid
     end
   end
 end
