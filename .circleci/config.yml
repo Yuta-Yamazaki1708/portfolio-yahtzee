@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+          command: apt-get update && apt-get install -y libvips42
+          name: install libvips
 
   rspec:
     working_directory: ~/yahtzee
