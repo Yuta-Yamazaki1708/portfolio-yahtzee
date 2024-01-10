@@ -33,10 +33,8 @@ jobs:
       - ruby/install-deps
       - run:
           command: |
-            mkdir -p /var/lib/apt/lists/partial
-            chmod 644 /var/lib/apt/lists/*
-      - run:
-          command: apt-get update && apt-get install -y libvips42
+            sudo apt-get update
+            sudo apt-get install -y libvips42
           name: install libvips
       - run:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
