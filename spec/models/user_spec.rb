@@ -69,6 +69,7 @@ RSpec.describe User, type: :model do
     before do
       Rails.application.env_config["devise.mapping"] = Devise.mappings[:google_user]
       Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+      sleep 10
     end
 
     it "guestメソッドが有効であること" do
