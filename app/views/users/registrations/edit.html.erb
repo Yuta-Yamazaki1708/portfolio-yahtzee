@@ -1,0 +1,50 @@
+<% content_for :css do %>
+  <%= stylesheet_link_tag 'form' %>
+<% end %>
+
+<main id="main">
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>アカウント設定</h2>
+      </div>
+      <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8 mt-5 mt-lg-0" data-turbo="true">
+          <%= form_with model: current_user, url: user_registration_path, class: "user-form", data: { "turbo-method": :patch } do |f|  %>
+            <div class="row">
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+                <% if @user.errors.include?(:email) %>
+                  <p style="color: red;"><%= @user.errors.full_messages_for(:email).first %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "新しいパスワード 変更しない場合は空欄" %>
+              <% if @user.errors.include?(:password) %>
+                <p style="color: red;"><%= @user.errors.full_messages_for(:password).first %>
+              <% end %>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "パスワード確認 変更しない場合は空欄" %>
+              <% if @user.errors.include?(:password_confirmation) %>
+                <p style="color: red;"><%= @user.errors.full_messages_for(:password_confirmation).first %>
+              <% end %>
+            </div>
+            <div class="form-group mt-3">
+              <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" ,placeholder: "現在のパスワード 必須" %>
+              <% if @user.errors.include?(:current_password) %>
+                <p style="color: red;"><%= @user.errors.full_messages_for(:current_password).first %>
+              <% end %>
+            </div>
+            <div class="row text-center justify-content-center" data-turbo="true">
+              <%= f.submit "更新する",class: "text-center submit-btn col-xs-10 col-md-6 mt-3" %>
+              <%= link_to "戻る", root_path %>
+              <%= link_to "退会する", user_registration_path, data: { turbo_confirm: "本当に退会しますか？この操作は取り消せません。", "turbo-method": :delete }, class: "text-center cancel-account-btn col-xs-10 col-md-6 mt-3" %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

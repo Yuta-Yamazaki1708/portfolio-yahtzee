@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag "glightbox.min" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" %>
+    <%= yield :css %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -19,14 +20,14 @@
 
     <%= yield %>
 
+    <div id="flash">
+      <%= render partial: "shared/flash" %>
+    </div>
+
     <%= render "shared/footer" %>
 
     <%= javascript_include_tag "aos" %>
-    <%= javascript_include_tag "purecounter_vanilla" %>
     <%= javascript_include_tag "glightbox.min" %>
-    <%= javascript_include_tag "isotope.pkgd.min" %>
     <%= javascript_include_tag "swiper-bundle.min" %>
-    <%= javascript_include_tag "noframework.waypoints" %>
-    <%= javascript_include_tag "validate" %>
   </body>
 </html>

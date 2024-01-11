@@ -16,10 +16,11 @@ jobs:
   rspec:
     working_directory: ~/yahtzee
     docker:
-      - image: cimg/ruby:3.2.2
+      - image: cimg/ruby:3.2.2-browsers
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_HOST: 127.0.0.1
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
@@ -31,6 +32,11 @@ jobs:
           version: 20.10.14
       - ruby/install-deps
       - run:
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libvips42
+          name: install libvips
+      - run:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
           name: Wait for DB
       - run:
@@ -39,7 +45,12 @@ jobs:
             bundle exec rails db:create
             bundle exec rails db:schema:load --trace
           name: Database setup
-      - ruby/rspec-test
+      - run:
+          command: |
+            mv spec/support/capybara.rb.ci spec/support/capybara.rb
+          name: capybara config
+      - ruby/rspec-test:
+          include: spec/**/*_spec.rb
 
   rubocop:
     working_directory: ~/yahtzee

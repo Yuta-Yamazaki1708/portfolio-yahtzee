@@ -1,9 +1,9 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
+import "@popperjs/core"
+import "bootstrap"
 //= require jquery3
-//= require popper
-//= require bootstrap
 
 /**
 * Template Name: Kelly
@@ -13,6 +13,7 @@ import "controllers"
 * License: https://bootstrapmade.com/license/
 */
 (function() {
+  Turbo.session.drive = false;
   "use strict";
 
   /**
@@ -81,21 +82,25 @@ import "controllers"
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
+  document.addEventListener('turbo:load', function() {
+    on('click', '.mobile-nav-toggle', function(e) {
+      select('#navbar').classList.toggle('navbar-mobile')
+      this.classList.toggle('bi-list')
+      this.classList.toggle('bi-x')
+    })
   })
 
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
+  document.addEventListener('turbo:load', function() {
+    on('click', '.navbar .dropdown > a', function(e) {
+      if (select('#navbar').classList.contains('navbar-mobile')) {
+        e.preventDefault()
+        this.nextElementSibling.classList.toggle('dropdown-active')
+      }
+    }, true)
+  })
 
   /**
    * Scrool with ofset on links with a class name .scrollto
@@ -245,10 +250,5 @@ import "controllers"
       mirror: false
     });
   });
-
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
 
 })()

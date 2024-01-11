@@ -1,0 +1,117 @@
+.contact .user-form {
+  width: 100%;
+  background: #e9e8e6;
+}
+
+.contact .user-form .form-group {
+  padding-bottom: 8px;
+}
+
+.contact .user-form .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .user-form .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .user-form .loading {
+  display: none;
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.contact .user-form .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #18d26e;
+  border-top-color: #eee;
+  animation: animate-loading 1s linear infinite;
+}
+
+.contact .user-form input,
+.contact .user-form textarea {
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.contact .user-form input:focus,
+.contact .user-form textarea:focus {
+  border-color: #34b7a7;
+}
+
+.contact .user-form input {
+  height: 44px;
+}
+
+.contact .user-form textarea {
+  padding: 10px 12px;
+}
+
+.contact .user-form button[type=submit] {
+  background: #34b7a7;
+  border: 0;
+  padding: 10px 30px 12px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .user-form button[type=submit]:hover {
+  background: #3dc8b7;
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.contact .user-form .submit-btn {
+  background: #34b7a7;
+  border: 0;
+  margin-bottom: 10px;
+  padding: 10px 30px 12px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .user-form .submit-btn:hover {
+  background: #3dc8b7;
+}
+
+.cancel-account-btn {
+  background: #ed3c0d;
+  border: 0;
+  margin-bottom: 10px;
+  padding: 10px 30px 12px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.cancel-account-btn:hover {
+  background-color: #ee7c5c;
+  color: #fff;
+}
