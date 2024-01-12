@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_04_032511) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_055516) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_04_032511) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "one", null: false
+    t.integer "two", null: false
+    t.integer "three", null: false
+    t.integer "four", null: false
+    t.integer "five", null: false
+    t.integer "six", null: false
+    t.integer "bonus", null: false
+    t.integer "choice", null: false
+    t.integer "four_dices", null: false
+    t.integer "full_house", null: false
+    t.integer "small_straight", null: false
+    t.integer "big_straight", null: false
+    t.integer "yahtzee", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
