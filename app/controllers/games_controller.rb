@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
-  def index
-    @game = Game.new()
+  DICE_NUM = 5
+
+  def new
+    @game = Game.new(DICE_NUM)
   end
 end

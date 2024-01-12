@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     post "user/guest_sign_in", to: "users/sessions#guest_sign_in", as: "guest_sign_in"
   end
 
-  get "/game", to: "games#index", as: "game"
+  get "/game", to: "games#new", as: "new_game"
 end
