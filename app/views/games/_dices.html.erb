@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "dices" do %>
+  <h4>キープしたサイコロの目</h4>
+  <% @keep_dices.each do |num| %>
+    <%= num %>
+  <% end %>
+  <h4>現在のサイコロの目</h4>
+  <% @dices.each do |num| %>
+    <%= num %>
+  <% end %>
+  <%= button_to "サイコロを振る", roll_dices_path, params: { id: @game.id, dices: @dices, keep_dices: @keep_dices } %>
+<% end %>
