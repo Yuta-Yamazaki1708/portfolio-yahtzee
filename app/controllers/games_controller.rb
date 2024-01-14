@@ -84,6 +84,6 @@ class GamesController < ApplicationController
     if array_of_param.nil?
       return
     end
-    array_of_param.map { |string| string.to_i }
+    array_of_param.map(&:to_i)
   end
 end

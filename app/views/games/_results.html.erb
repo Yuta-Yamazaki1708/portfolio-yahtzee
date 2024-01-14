@@ -6,8 +6,9 @@
         <% if result %>
           <td colspan="2"><%= result %></td>
         <% elsif calculated_scores[category] %>
-          <td colspan="2"><%= button_to calculated_scores[category], select_category_path, params: { id: game.id, category: category, calculated_score: calculated_scores[category] } %></td>
+          <td colspan="2"><%= button_to calculated_scores[category], select_category_path, method: :patch, params: { id: game.id, category: category, calculated_score: calculated_scores[category] } %></td>
         <% else %>
+          <td colspan="2">0</td>
         <% end %>
       </tr>
     <% end %>
