@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   post "/roll_dices", to: "games#roll_dices", as: "roll_dices"
   post "/move_to_keep", to: "games#move_to_keep", as: "move_to_keep"
   post "/move_to_table", to: "games#move_to_table", as: "move_to_table"
+  post "/select_category", to: "games#select_category", as: "select_category"
 end

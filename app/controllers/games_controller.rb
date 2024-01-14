@@ -52,6 +52,17 @@ class GamesController < ApplicationController
     render "update_dices", formats: :turbo_stream
   end
 
+  def select_category
+    @game = Game.find(params[:id])
+    @game.update(params[:category] => params[:calculated_score].to_i)
+    @table_dices = Array.new(DICE_NUM) { "Dice" }
+    @keep_dices = []
+    @categories_and_results = @game.display_results
+    @calculated_scores = {}
+    session[:execution_count] = 0
+    render "update_dices", formats: :turbo_stream
+  end
+
   private
 
   def check_roll_count

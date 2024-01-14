@@ -6,7 +6,7 @@
           <h1>Result</h1>
 
           <%= turbo_frame_tag "results" do %>
-            <%= render partial: "results", locals: { categories_and_results: @categories_and_results, calculated_scores: @calculated_scores } %>
+            <%= render partial: "results", locals: { game: @game, categories_and_results: @categories_and_results, calculated_scores: @calculated_scores } %>
           <% end %>
 
         </div>

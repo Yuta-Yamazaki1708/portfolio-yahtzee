@@ -3,7 +3,12 @@
     <% categories_and_results.each do |category, result| %>
       <tr>
         <th scope="row"><%= category %></th>
-        <td colspan="2"><%= result || calculated_scores[category] %></td>
+        <% if result %>
+          <td colspan="2"><%= result %></td>
+        <% elsif calculated_scores[category] %>
+          <td colspan="2"><%= button_to calculated_scores[category], select_category_path, params: { id: game.id, category: category, calculated_score: calculated_scores[category] } %></td>
+        <% else %>
+        <% end %>
       </tr>
     <% end %>
    </tbody>
