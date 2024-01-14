@@ -1,0 +1,10 @@
+<table class="table table-hover table-responsive">
+  <tbody>
+    <% categories_and_results.each do |category, result| %>
+      <tr>
+        <th scope="row"><%= category %></th>
+        <td colspan="2"><%= result || calculated_scores[category] %></td>
+      </tr>
+    <% end %>
+   </tbody>
+</table>

@@ -1,0 +1,11 @@
+<h4>キープしたサイコロの目</h4>
+<% keep_dices.each_with_index do |num, index| %>
+  <%= button_to "#{num}", move_to_table_path, params: { id: game.id, from_dices: keep_dices, to_dices: table_dices, index: index } %>
+<% end %>
+<h4>現在のサイコロの目</h4>
+<% table_dices.each_with_index do |num, index| %>
+  <%= button_to "#{num}", move_to_keep_path, params: { id: game.id, from_dices: table_dices, to_dices: keep_dices, index: index } %>
+<% end %>
+<% if table_dices.size > 0 %>
+  <%= button_to "サイコロを振る", roll_dices_path, params: { id: game.id, table_dices: table_dices, keep_dices: keep_dices } %>
+<% end %>
