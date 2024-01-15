@@ -10,10 +10,14 @@
           <% end %>
 
         </div>
-        <div class="col-md-6 col-12">
+        <div class="col-md-6 col-12" data-turbo="true">
 
           <%= turbo_frame_tag "field" do %>
-            <%= render partial: "field", locals: { game: @game, table_dices: @table_dices, keep_dices: @keep_dices }  %>
+            <%= render partial: "field", locals: { table_dices: @table_dices, keep_dices: @keep_dices }  %>
+          <% end %>
+
+          <% if @table_dices.size > 0 %>
+            <%= button_to "サイコロを振る", roll_dices_path, method: :get, params: { id: @game.id, table_dices: @table_dices, keep_dices: @keep_dices } %>
           <% end %>
 
         </div>

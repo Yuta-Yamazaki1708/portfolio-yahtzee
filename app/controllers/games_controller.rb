@@ -24,26 +24,24 @@ class GamesController < ApplicationController
     @categories_and_results = @game.display_results
     @table_dices = param_to_integer(params[:table_dices])
     dice_num = @table_dices.size
-    @table_dices = @game.roll_dices(dice_num)
+    @table_dices = Game.roll_dices(dice_num)
     @keep_dices = param_to_integer(params[:keep_dices]) || []
-    @calculated_scores = @game.calculate_scores(@table_dices + @keep_dices)
-    render "update_dices", formats: :turbo_stream
+    @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
+    render "roll_dice", formats: :turbo_stream
   end
 
   def move_to_keep
-    @game = Game.find(params[:id])
     @table_dices = param_to_integer(params[:from_dices])
     @keep_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
-    @game.move(@table_dices, @keep_dices, index)
+    Game.move(@table_dices, @keep_dices, index)
   end
 
   def move_to_table
-    @game = Game.find(params[:id])
     @keep_dices = param_to_integer(params[:from_dices])
     @table_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
-    @game.move(@keep_dices, @table_dices, index)
+    Game.move(@keep_dices, @table_dices, index)
   end
 
   def select_category
@@ -64,7 +62,7 @@ class GamesController < ApplicationController
     @categories_and_results = @game.display_results
     @table_dices = param_to_integer(params[:table_dices])
     @keep_dices = param_to_integer(params[:keep_dices]) || []
-    @calculated_scores = @game.calculate_scores(@table_dices + @keep_dices)
+    @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
     if session[:execution_count].to_i < TIMES_OF_ROLL_DICES
       session[:execution_count] ||= 0
       session[:execution_count] += 1

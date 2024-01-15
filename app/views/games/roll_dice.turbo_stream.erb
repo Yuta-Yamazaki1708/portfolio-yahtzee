@@ -1,0 +1,9 @@
+<%= turbo_stream.update "results" do %>
+  <%= render partial: "results", locals: { game: @game, categories_and_results: @categories_and_results, calculated_scores: @calculated_scores } %>
+<% end %>
+
+<%= turbo_stream.update "field" do %>
+  <%= render partial: "field", locals: { game: @game, table_dices: @table_dices, keep_dices: @keep_dices } %>
+<% end %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

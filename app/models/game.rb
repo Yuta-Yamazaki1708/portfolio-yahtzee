@@ -23,20 +23,20 @@ class Game < ApplicationRecord
     CATEGORIES.index_with { |category| public_send(category) }
   end
 
-  # クラスメソッドにした方がいいかも？
+  # クラスメソッド
 
-  def roll_dices(dice_num)
+  def self.roll_dices(dice_num)
     dices = Array.new(dice_num) { rand(1..FACE_NUM) }
     dices
   end
 
-  def move(from_array, to_array, index)
+  def self.move(from_array, to_array, index)
     tmp = from_array[index]
     from_array.delete_at(index)
     to_array.push(tmp)
   end
 
-  def calculate_scores(array)
+  def self.calculate_scores(array)
     if array.include?(0)
       return CATEGORIES.index_with { |category| nil }
     end
@@ -73,9 +73,7 @@ class Game < ApplicationRecord
     caluculated_scores
   end
 
-  private
-
-  def check_s_straight(sorted_array)
+  def self.check_s_straight(sorted_array)
     sorted_array.each_cons(4) do |subarray|
       if subarray.each_cons(2).all? { |a, b| b == a + 1 }
         return true
@@ -83,7 +81,7 @@ class Game < ApplicationRecord
     end
   end
 
-  def check_b_straight(sorted_array)
+  def self.check_b_straight(sorted_array)
     sorted_array.each_cons(5) do |subarray|
       if subarray.each_cons(2).all? { |a, b| b == a + 1 }
         return true
