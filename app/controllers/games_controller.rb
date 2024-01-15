@@ -32,24 +32,18 @@ class GamesController < ApplicationController
 
   def move_to_keep
     @game = Game.find(params[:id])
-    @categories_and_results = @game.display_results
     @table_dices = param_to_integer(params[:from_dices])
     @keep_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
     @game.move(@table_dices, @keep_dices, index)
-    @calculated_scores = @game.calculate_scores(@table_dices + @keep_dices)
-    render "update_dices", formats: :turbo_stream
   end
 
   def move_to_table
     @game = Game.find(params[:id])
-    @categories_and_results = @game.display_results
     @keep_dices = param_to_integer(params[:from_dices])
     @table_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
     @game.move(@keep_dices, @table_dices, index)
-    @calculated_scores = @game.calculate_scores(@table_dices + @keep_dices)
-    render "update_dices", formats: :turbo_stream
   end
 
   def select_category

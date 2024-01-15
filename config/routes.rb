@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post "/new_game", to: "games#new_game", as: "new_game"
   get "/game/:id", to: "games#game", as: "game"
   post "/roll_dices", to: "games#roll_dices", as: "roll_dices"
-  post "/move_to_keep", to: "games#move_to_keep", as: "move_to_keep"
-  post "/move_to_table", to: "games#move_to_table", as: "move_to_table"
+  get "/move_to_keep", to: "games#move_to_keep", as: "move_to_keep"
+  get "/move_to_table", to: "games#move_to_table", as: "move_to_table"
   patch "/select_category", to: "games#select_category", as: "select_category"
 end
