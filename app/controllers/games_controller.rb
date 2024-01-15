@@ -22,15 +22,15 @@ class GamesController < ApplicationController
   def roll_dices
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
-    @table_dices = param_to_integer(params[:table_dices])
-    dice_num = @table_dices.size
+    dice_num = param_to_integer(params[:table_dices]).size
     @table_dices = Game.roll_dices(dice_num)
     @keep_dices = param_to_integer(params[:keep_dices]) || []
     @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
-    render "roll_dice", formats: :turbo_stream
+    render "roll_dices", formats: :turbo_stream
   end
 
   def move_to_keep
+    @game = Game.find(params[:id])
     @table_dices = param_to_integer(params[:from_dices])
     @keep_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
@@ -38,6 +38,7 @@ class GamesController < ApplicationController
   end
 
   def move_to_table
+    @game = Game.find(params[:id])
     @keep_dices = param_to_integer(params[:from_dices])
     @table_dices = param_to_integer(params[:to_dices]) || []
     index = params[:index].to_i
@@ -52,7 +53,7 @@ class GamesController < ApplicationController
     @categories_and_results = @game.display_results
     @calculated_scores = {}
     session[:execution_count] = 0
-    render "update_dices", formats: :turbo_stream
+    render "select_category", formats: :turbo_stream
   end
 
   private
@@ -68,7 +69,7 @@ class GamesController < ApplicationController
       session[:execution_count] += 1
     else
       flash.now.alert = "サイコロを振れるのは3回までです。"
-      render "update_dices", formats: :turbo_stream
+      render "roll_dices", formats: :turbo_stream
     end
   end
 

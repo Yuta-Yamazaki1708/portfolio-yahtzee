@@ -1,3 +1,4 @@
 <%= turbo_frame_tag "field" do %>
-  <%= render partial: "field", locals: { table_dices: @table_dices, keep_dices: @keep_dices } %>
+  <%= render partial: "field", locals: { game: @game, table_dices: @table_dices, keep_dices: @keep_dices } %>
 <% end %>
+

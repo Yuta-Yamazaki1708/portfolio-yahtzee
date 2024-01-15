@@ -5,5 +5,3 @@
 <%= turbo_stream.update "field" do %>
   <%= render partial: "field", locals: { game: @game, table_dices: @table_dices, keep_dices: @keep_dices } %>
 <% end %>
-
-<%= turbo_stream.update "flash", partial: "shared/flash" %>
