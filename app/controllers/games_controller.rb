@@ -8,7 +8,11 @@ class GamesController < ApplicationController
   TURN_NUM = Game::CATEGORIES.size - 2
 
   def new_game
-    @game = Game.new
+    if user_signed_in?
+      @game = current_user.games.new
+    else
+      @game = Game.new
+    end
     @game.save
     redirect_to game_path(@game)
   end
@@ -113,11 +117,11 @@ class GamesController < ApplicationController
 
   def bonus(game)
     categories = ["one", "two", "three", "four", "five", "six"]
-    from_one_to_six =categories.index_with { |category| game.public_send(category).to_i }
+    from_one_to_six = categories.index_with { |category| game.public_send(category).to_i }
     if from_one_to_six.values.inject(:+) >= 63
-      return 35
+      35
     else
-      return nil
+      nil
     end
   end
 

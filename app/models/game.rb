@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  belongs_to :user, optional: true
+
   FACE_NUM = 6
   CATEGORIES = [
     "one",
@@ -17,13 +19,13 @@ class Game < ApplicationRecord
     "sum",
   ].freeze
 
-  # インスタンスメソッド
+  # インスタンスメソッド.
 
   def display_results
     CATEGORIES.index_with { |category| public_send(category) }
   end
 
-  # クラスメソッド
+  # クラスメソッド.
 
   def self.roll_dices(dice_num)
     dices = Array.new(dice_num) { rand(1..FACE_NUM) }
