@@ -1,8 +1,10 @@
 class GamesController < ApplicationController
   before_action :check_roll_count, only: [:roll_dices]
+  before_action :check_turn_count, only: [:select_category]
 
   DICE_NUM = 5
   TIMES_OF_ROLL_DICES = 3
+  TURN_NUM = Game::CATEGORIES.size - 2
 
   def new_game
     @game = Game.new
@@ -11,7 +13,7 @@ class GamesController < ApplicationController
   end
 
   def game
-    session[:execution_count] = 0
+    session[:roll_count] = nil
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
     @table_dices = Array.new(DICE_NUM) { "Dice" }
@@ -52,8 +54,13 @@ class GamesController < ApplicationController
     @keep_dices = []
     @categories_and_results = @game.display_results
     @calculated_scores = {}
-    session[:execution_count] = 0
-    render "select_category", formats: :turbo_stream
+    if session[:turn_count].to_i < TURN_NUM
+      render "select_category", formats: :turbo_stream
+    else
+      session[:turn_count] = nil
+      session[:roll_count] = nil
+      render "game_over", formats: :turbo_stream
+    end
   end
 
   private
@@ -64,13 +71,19 @@ class GamesController < ApplicationController
     @table_dices = param_to_integer(params[:table_dices])
     @keep_dices = param_to_integer(params[:keep_dices]) || []
     @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
-    if session[:execution_count].to_i < TIMES_OF_ROLL_DICES
-      session[:execution_count] ||= 0
-      session[:execution_count] += 1
+    if session[:roll_count].to_i < TIMES_OF_ROLL_DICES
+      session[:roll_count] ||= 0
+      session[:roll_count] += 1
     else
       flash.now.alert = "サイコロを振れるのは3回までです。"
       render "roll_dices", formats: :turbo_stream
     end
+  end
+
+  def check_turn_count
+    session[:roll_count] = nil
+    session[:turn_count] ||= 0
+    session[:turn_count] += 1
   end
 
   def param_to_integer(array_of_param)

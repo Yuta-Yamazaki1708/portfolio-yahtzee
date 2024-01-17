@@ -4,8 +4,7 @@
   %>
 <% end %>
 
-<%= turbo_stream.update "field" do %>
-  <%= render partial: "field_before_roll",
-    locals: field_locals(@game, @table_dices, @keep_dices)
-  %>
+<%= turbo_stream.replace "field" do %>
+  <%= link_to "ホームに戻る", root_path %>
+  <%= link_to "もう一度プレイ", new_game_path, data: { "turbo-method": :post } %>
 <% end %>

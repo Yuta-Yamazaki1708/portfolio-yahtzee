@@ -9,7 +9,7 @@
       <% if user_signed_in? %>
         <%= link_to "プレイする", new_game_path , class: "btn-link", data: {"turbo-method": :post} %>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6"%>
+        <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6" %>
         <%= link_to "ゲストログイン", guest_sign_in_path, data: {"turbo-method": :post}, class: "btn-link col-6" %>
         <%= link_to "プレイする", new_game_path , class: "btn-link col-6", data: {"turbo-method": :post} %>
       <% end %>

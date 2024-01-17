@@ -1,0 +1,7 @@
+<% if @table_dices.size > 0 %>
+  <%= button_to "サイコロを振る",
+    roll_dices_path,
+    method: :get,
+    params: roll_dices_params(game, table_dices, keep_dices)
+  %>
+<% end %>
