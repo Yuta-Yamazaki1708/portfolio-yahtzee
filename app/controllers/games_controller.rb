@@ -51,6 +51,8 @@ class GamesController < ApplicationController
   def select_category
     @game = Game.find(params[:id])
     @game.update(params[:category] => params[:calculated_score].to_i)
+    @game.update("bonus" => bonus(@game))
+    @game.update("sum" => sum(@game))
     @table_dices = Array.new(DICE_NUM) { "Dice" }
     @keep_dices = []
     @categories_and_results = @game.display_results
@@ -66,6 +68,7 @@ class GamesController < ApplicationController
 
   private
 
+  # サイコロを振った回数を記録する.
   def check_roll_count
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
@@ -81,12 +84,14 @@ class GamesController < ApplicationController
     end
   end
 
+  # ターン数を記録する.
   def check_turn_count
     session[:roll_count] = nil
     session[:turn_count] ||= 0
     session[:turn_count] += 1
   end
 
+  # ゲームの途中でリロードされた場合、ゲームを中止してホームへリダイレクト.
   def check_reload
     unless session[:turn_count].nil?
       session[:turn_count] = nil
@@ -98,10 +103,26 @@ class GamesController < ApplicationController
     end
   end
 
+  # 文字列で送られてきたパラムを数値に変換する、一番最初は値がnilなためreturn.
   def param_to_integer(array_of_param)
     if array_of_param.nil?
       return
     end
     array_of_param.map(&:to_i)
+  end
+
+  def bonus(game)
+    categories = ["one", "two", "three", "four", "five", "six"]
+    from_one_to_six =categories.index_with { |category| game.public_send(category).to_i }
+    if from_one_to_six.values.inject(:+) >= 63
+      return 35
+    else
+      return nil
+    end
+  end
+
+  def sum(game)
+    categories_remove_sum = Game::CATEGORIES.reject { |category| category == "sum" }
+    categories_remove_sum.index_with { |category| game.public_send(category).to_i }.values.inject(:+)
   end
 end

@@ -5,6 +5,6 @@
 <% end %>
 
 <%= turbo_stream.replace "field" do %>
-  <%= link_to "ホームに戻る", root_path %>
   <%= link_to "もう一度プレイ", new_game_path, data: { "turbo-method": :post } %>
+  <%= link_to "ホームに戻る", root_path %>
 <% end %>
