@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :check_reload, only: [:game]
   before_action :check_roll_count, only: [:roll_dices]
   before_action :check_turn_count, only: [:select_category]
 
@@ -84,6 +85,17 @@ class GamesController < ApplicationController
     session[:roll_count] = nil
     session[:turn_count] ||= 0
     session[:turn_count] += 1
+  end
+
+  def check_reload
+    unless session[:turn_count].nil?
+      session[:turn_count] = nil
+      session[:roll_count] = nil
+      game = Game.find(params[:id])
+      game.destroy
+      flash.notice = "リロードされたためゲームを中止しました。"
+      redirect_to root_path
+    end
   end
 
   def param_to_integer(array_of_param)
