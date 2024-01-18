@@ -4,13 +4,13 @@
       <tr>
         <th scope="row"><%= category %></th>
         <% if result %>
-          <td colspan="2"><%= result %></td>
+          <td colspan="2" class="result"><%= result %></td>
         <% elsif calculated_scores[category] %>
           <td colspan="2">
-            <%= button_to calculated_scores[category],
-              select_category_path,
-              method: :patch,
-              params: select_category_params(game, category, calculated_scores[category])
+            <%= link_to calculated_scores[category],
+              select_category_path(select_category_params(game, category, calculated_scores[category])),
+              data: { "turbo-method": :patch },
+              class: "calculated_scores"
             %>
           </td>
         <% else %>

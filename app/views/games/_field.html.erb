@@ -1,25 +1,26 @@
-<h4>キープしたサイコロの目</h4>
-<% keep_dices.each_with_index do |num, index| %>
-  <%= button_to "#{num}", 
-    move_to_table_path,
-    method: :get,
-    params: move_btn_params(game, keep_dices, table_dices, index)
-  %>
-<% end %>
+<div class="row justify-content-start">
+  <h4>キープしたサイコロの目</h4>
+  <% keep_dices.each_with_index do |num, index| %>
+    <%= link_to "#{num}", 
+      move_to_table_path(move_btn_params(game, keep_dices, table_dices, index)),
+      class: "col-2"
+    %>
+  <% end %>
+</div>
 
-<h4>現在のサイコロの目</h4>
-<% table_dices.each_with_index do |num, index| %>
-  <%= button_to "#{num}",
-    move_to_keep_path,
-    method: :get,
-    params: move_btn_params(game, table_dices, keep_dices, index)
-  %>
-<% end %>
+<div class="row justify-content-start">
+  <h4>現在のサイコロの目</h4>
+  <% table_dices.each_with_index do |num, index| %>
+    <%= link_to "#{num}",
+      move_to_keep_path(move_btn_params(game, table_dices, keep_dices, index)),
+      class: "col-2"
+    %>
+  <% end %>
+</div>
 
 <% if table_dices.size > 0 %>
-  <%= button_to "サイコロを振る",
-    roll_dices_path,
-    method: :get,
-    params: roll_dices_params(game, table_dices, keep_dices)
+  <%= link_to "サイコロを振る",
+    roll_dices_path(roll_dices_params(game, table_dices, keep_dices)),
+    class: "btn-link"
   %>
 <% end %>

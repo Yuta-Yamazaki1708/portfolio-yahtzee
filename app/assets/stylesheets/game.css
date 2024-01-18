@@ -1,0 +1,8 @@
+td a {
+  color: gray;
+  display: block;
+}
+
+.result {
+  font-weight: bold;
+}

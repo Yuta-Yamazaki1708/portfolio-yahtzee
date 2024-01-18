@@ -116,12 +116,12 @@ class GamesController < ApplicationController
   end
 
   def bonus(game)
-    categories = ["one", "two", "three", "four", "five", "six"]
-    from_one_to_six = categories.index_with { |category| game.public_send(category).to_i }
+    categories_from_one_to_six = ["one", "two", "three", "four", "five", "six"]
+    from_one_to_six = categories_from_one_to_six.index_with { |category| game.public_send(category).to_i }
     if from_one_to_six.values.inject(:+) >= 63
       35
     else
-      nil
+      0
     end
   end
 
