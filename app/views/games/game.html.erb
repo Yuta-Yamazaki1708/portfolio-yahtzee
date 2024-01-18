@@ -20,7 +20,7 @@
         <div class="col-md-6 col-12" data-turbo="true">
 
           <%= turbo_frame_tag "field" do %>
-            <%= render partial: "field_before_roll",
+            <%= render partial: "field",
               locals: field_locals(@game, @table_dices, @keep_dices)
             %>
           <% end %>

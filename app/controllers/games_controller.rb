@@ -21,7 +21,7 @@ class GamesController < ApplicationController
     session[:roll_count] = nil
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
-    @table_dices = Array.new(DICE_NUM) { "Dice" }
+    @table_dices = Array.new(DICE_NUM) { nil }
     @keep_dices = []
     @calculated_scores = {}
   end
@@ -57,7 +57,7 @@ class GamesController < ApplicationController
     @game.update(params[:category] => params[:calculated_score].to_i)
     @game.update("bonus" => bonus(@game))
     @game.update("sum" => sum(@game))
-    @table_dices = Array.new(DICE_NUM) { "Dice" }
+    @table_dices = Array.new(DICE_NUM) { nil }
     @keep_dices = []
     @categories_and_results = @game.display_results
     @calculated_scores = {}

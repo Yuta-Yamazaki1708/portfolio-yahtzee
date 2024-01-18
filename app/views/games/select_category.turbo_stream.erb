@@ -5,7 +5,7 @@
 <% end %>
 
 <%= turbo_stream.update "field" do %>
-  <%= render partial: "field_before_roll",
+  <%= render partial: "field",
     locals: field_locals(@game, @table_dices, @keep_dices)
   %>
 <% end %>

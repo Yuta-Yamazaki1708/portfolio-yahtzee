@@ -6,3 +6,7 @@ td a {
 .result {
   font-weight: bold;
 }
+
+.dice-container {
+  min-height: 150px;
+}
