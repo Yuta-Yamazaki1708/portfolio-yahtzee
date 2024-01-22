@@ -19,20 +19,24 @@ class GamesController < ApplicationController
 
   def game
     session[:roll_count] = nil
+    session[:table_dices] = Array.new(DICE_NUM) { 0 }
+    session[:keep_dices] = []
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
-    @table_dices = Array.new(DICE_NUM) { nil }
-    @keep_dices = []
+    @table_dices = session[:table_dices]
+    @keep_dices = session[:keep_dices]
     @calculated_scores = {}
   end
 
   def roll_dices
+    dice_num = session[:table_dices].size
+    session[:table_dices] = Game.roll_dices(dice_num)
+    session[:keep_dices] = session[:keep_dices] || []
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
-    dice_num = param_to_integer(params[:table_dices]).size
-    @table_dices = Game.roll_dices(dice_num)
-    @keep_dices = param_to_integer(params[:keep_dices]) || []
-    @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
+    @calculated_scores = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
+    @table_dices = session[:table_dices]
+    @keep_dices = session[:keep_dices]
     render "roll_dices", formats: :turbo_stream
   end
 
@@ -57,7 +61,7 @@ class GamesController < ApplicationController
     @game.update(params[:category] => params[:calculated_score].to_i)
     @game.update("bonus" => bonus(@game))
     @game.update("sum" => sum(@game))
-    @table_dices = Array.new(DICE_NUM) { nil }
+    @table_dices = Array.new(DICE_NUM) { 0 }
     @keep_dices = []
     @categories_and_results = @game.display_results
     @calculated_scores = {}
@@ -81,11 +85,13 @@ class GamesController < ApplicationController
 
   # サイコロを振った回数を記録する.
   def check_roll_count
+    session[:table_dices] = session[:table_dices]
+    session[:keep_dices] = session[:keep_dices] || []
     @game = Game.find(params[:id])
     @categories_and_results = @game.display_results
-    @table_dices = param_to_integer(params[:table_dices])
-    @keep_dices = param_to_integer(params[:keep_dices]) || []
-    @calculated_scores = Game.calculate_scores(@table_dices + @keep_dices)
+    @calculated_scores = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
+    @table_dices = session[:table_dices]
+    @keep_dices = session[:keep_dices]
     if session[:roll_count].to_i < TIMES_OF_ROLL_DICES
       session[:roll_count] ||= 0
       session[:roll_count] += 1
