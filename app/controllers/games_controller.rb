@@ -65,9 +65,16 @@ class GamesController < ApplicationController
       render "select_category", formats: :turbo_stream
     else
       session[:turn_count] = nil
-      session[:roll_count] = nil
       render "game_over", formats: :turbo_stream
     end
+  end
+
+  # javascriptで使用する変数をjsonAPIで出力する
+  def get_roll_count
+    render json: {
+      roll_count: session[:roll_count],
+      times_of_roll_dices: TIMES_OF_ROLL_DICES,
+    }
   end
 
   private
@@ -83,6 +90,7 @@ class GamesController < ApplicationController
       session[:roll_count] ||= 0
       session[:roll_count] += 1
     else
+      session[:roll_count] += 1
       flash.now.alert = "サイコロを振れるのは3回までです。"
       render "roll_dices", formats: :turbo_stream
     end
@@ -90,16 +98,15 @@ class GamesController < ApplicationController
 
   # ターン数を記録する.
   def check_turn_count
-    session[:roll_count] = nil
     session[:turn_count] ||= 0
     session[:turn_count] += 1
+    session[:roll_count] = nil
   end
 
   # ゲームの途中でリロードされた場合、ゲームを中止してホームへリダイレクト.
   def check_reload
     unless session[:turn_count].nil?
       session[:turn_count] = nil
-      session[:roll_count] = nil
       game = Game.find(params[:id])
       game.destroy
       flash.notice = "リロードされたためゲームを中止しました。"

@@ -7,21 +7,30 @@
     %>
   <% end %>
 </div>
-<div class="row justify-content-start dice-container">
-  <h3>現在のサイコロの目</h3>
-  <% if table_dices.all? %>
-    <% table_dices.each_with_index do |num, index| %>
-      <%= link_to image_tag("dice#{num}.jpg", size: "50x50"),
-        move_to_keep_path(move_btn_params(game, table_dices, keep_dices, index)),
-        class: "col-2"
-      %>
+<div data-controller="dice">
+  <div class="row justify-content-start dice-container">
+    <h3>現在のサイコロの目</h3>
+    <% if table_dices.all? %>
+      <% table_dices.each_with_index do |num, index| %>
+        <%= link_to image_tag("dice#{num}.jpg", size: "50x50", data: { dice_target: "dice#{index}", action: "load->dice#roll_dice" }),
+          move_to_keep_path(move_btn_params(game, table_dices, keep_dices, index)),
+          class: "col-2"
+        %>
+      <% end %>
     <% end %>
+  </div>
+  <% if table_dices.size > 0 %>
+    <%= link_to "サイコロを振る",
+      roll_dices_path(roll_dices_params(game, table_dices, keep_dices)),
+      class: "btn-link"
+    %>
   <% end %>
+
+  <h3>残り
+  <% if 3 - session[:roll_count].to_i > 0 %>
+    <%= 3 - session[:roll_count].to_i %>
+  <% else %>
+    <%= 0 %>
+  <% end %>
+  回振れます</h3>
 </div>
-<% if table_dices.size > 0 %>
-  <%= link_to "サイコロを振る",
-    roll_dices_path(roll_dices_params(game, table_dices, keep_dices)),
-    class: "btn-link"
-  %>
-<% end %>
-<h3>残り<%= 3 - (session[:roll_count] || 0 ) %>回振れます</h3>

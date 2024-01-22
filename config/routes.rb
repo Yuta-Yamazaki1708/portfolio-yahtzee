@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get "/move_to_keep", to: "games#move_to_keep", as: "move_to_keep"
   get "/move_to_table", to: "games#move_to_table", as: "move_to_table"
   patch "/select_category", to: "games#select_category", as: "select_category"
+  get "/get_roll_count", to: "games#get_roll_count"
 end
