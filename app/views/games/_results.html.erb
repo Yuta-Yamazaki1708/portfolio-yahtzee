@@ -8,7 +8,7 @@
         <% elsif calculated_scores[category] %>
           <td colspan="2">
             <%= link_to calculated_scores[category],
-              select_category_path(select_category_params(game, category, calculated_scores[category])),
+              select_category_path(select_category_params(game, category)),
               data: { "turbo-method": :patch },
               class: "calculated_scores"
             %>
