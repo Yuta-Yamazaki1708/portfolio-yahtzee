@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   before_action :check_turn_count, only: [:select_category]
 
   DICE_NUM = 5
-  TIMES_OF_ROLL_DICES = 3
+  MAX_ROLL_DICES = 3
   TURN_NUM = Game::CATEGORIES.size - 2
 
   def new_game
@@ -85,7 +85,7 @@ class GamesController < ApplicationController
   def get_roll_count
     render json: {
       roll_count: session[:roll_count],
-      times_of_roll_dices: TIMES_OF_ROLL_DICES,
+      max_roll_dices: MAX_ROLL_DICES,
     }
   end
 
@@ -100,7 +100,7 @@ class GamesController < ApplicationController
 
   # サイコロを振った回数を記録する.
   def check_roll_count
-    if session[:roll_count].to_i < TIMES_OF_ROLL_DICES
+    if session[:roll_count].to_i < MAX_ROLL_DICES
       session[:roll_count] ||= 0
       session[:roll_count] += 1
     else

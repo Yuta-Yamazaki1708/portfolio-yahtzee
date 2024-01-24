@@ -12,8 +12,8 @@ export default class extends Controller {
     .then(response => response.json())
     .then(data => {
       const rollCount = data.roll_count
-      const timesRollDices = data.times_of_roll_dices
-      if (rollCount <= timesRollDices) {
+      const maxRollDices = data.max_roll_dices
+      if (rollCount <= maxRollDices) {
         for (let i = 0; i < 5; i++) {
           const currentDice = this[`dice${i}Target`];
           currentDice.classList.add("rolling");
