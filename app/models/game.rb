@@ -1,6 +1,21 @@
 class Game < ApplicationRecord
   belongs_to :user, optional: true
 
+  validates :one, inclusion: { in: [nil, 0, 1, 2, 3, 4, 5] }
+  validates :two, inclusion: { in: [nil, 0, 2, 4, 6, 8, 10] }
+  validates :three, inclusion: { in: [nil, 0, 3, 6, 9, 12, 15] }
+  validates :four, inclusion: { in: [nil, 0, 4, 8, 12, 16, 20] }
+  validates :five, inclusion: { in: [nil, 0, 5, 10, 15, 20, 25] }
+  validates :six, inclusion: { in: [nil, 0, 6, 12, 18, 24, 30] }
+  validates :bonus, inclusion: { in: [nil, 0, 35] }
+  validates :choice, inclusion: { in: [nil, 0, *5..30] }
+  validates :four_dices, inclusion: { in: [nil, 0, *5..30] }
+  validates :full_house, inclusion: { in: [nil, 0, *5..30] }
+  validates :small_straight, inclusion: { in: [nil, 0, 15] }
+  validates :big_straight, inclusion: { in: [nil, 0, 30] }
+  validates :yacht, inclusion: { in: [nil, 0, 50] }
+  validates :sum, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 335 }
+
   FACE_NUM = 6
   CATEGORIES = [
     "one",

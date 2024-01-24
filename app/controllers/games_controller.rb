@@ -60,9 +60,13 @@ class GamesController < ApplicationController
 
   def select_category
     @game = Game.find(params[:id])
-    @game.update(params[:category] => session[:calculated_scores][params[:category]])
-    @game.update("bonus" => bonus(@game))
-    @game.update("sum" => sum(@game))
+    if @game.update(params[:category] => session[:calculated_scores][params[:category]]) &&
+      @game.update("bonus" => bonus(@game)) &&
+      @game.update("sum" => sum(@game))
+    else
+      flash.now.alert = "エラーが発生しました。"
+      session[:turn_count] -= 1
+    end
 
     session[:table_dices] = Array.new(DICE_NUM) { 0 }
     session[:keep_dices] = []

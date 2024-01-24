@@ -9,3 +9,5 @@
     locals: field_locals(@game, @table_dices, @keep_dices)
   %>
 <% end %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>
