@@ -2,7 +2,7 @@
   <h3>キープしたサイコロの目</h3>
   <% keep_dices.each_with_index do |num, index| %>
     <%= link_to image_tag("dice_image#{num}.jpg", size: "50x50"), 
-      move_to_table_path(move_btn_params(game, index)),
+      move_to_table_path(move_btn_params(index)),
       class: "col-2"
     %>
   <% end %>
@@ -13,7 +13,7 @@
     <% table_dices.each %>
       <% table_dices.each_with_index do |num, index| if (num > 0 && num <= 6) %>
         <%= link_to image_tag("dice_image#{num}.jpg", size: "50x50", data: { dice_target: "dice#{index}", action: "load->dice#roll_dice" }),
-          move_to_keep_path(move_btn_params(game, index)),
+          move_to_keep_path(move_btn_params(index)),
           class: "col-2"
         %>
       <% end %>
@@ -21,7 +21,7 @@
   </div>
   <% if table_dices.size > 0 %>
     <%= link_to "サイコロを振る",
-      roll_dices_path({id: game.id}),
+      roll_dices_path,
       class: "btn-link"
     %>
   <% end %>

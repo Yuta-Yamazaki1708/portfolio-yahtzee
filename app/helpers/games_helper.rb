@@ -1,14 +1,12 @@
 module GamesHelper
-  def move_btn_params(game, index)
+  def move_btn_params(index)
     {
-      id: game.id,
       index: index,
     }
   end
 
-  def select_category_params(game, category)
+  def select_category_params(category)
     {
-      id: game.id,
       category: category,
     }
   end

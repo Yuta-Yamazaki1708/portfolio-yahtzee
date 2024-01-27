@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   post "/new_game", to: "games#new_game", as: "new_game"
-  get "/game/:id", to: "games#game", as: "game"
+  get "/game", to: "games#game", as: "game"
   get "/roll_dices", to: "games#roll_dices", as: "roll_dices"
   get "/move_to_keep", to: "games#move_to_keep", as: "move_to_keep"
   get "/move_to_table", to: "games#move_to_table", as: "move_to_table"
