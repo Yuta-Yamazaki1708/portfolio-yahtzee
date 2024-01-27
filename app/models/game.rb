@@ -79,18 +79,17 @@ class Game < ApplicationRecord
     counts = array.uniq.map { |num| array.count(num) }
     caluculated_scores["full_house"] = counts.include?(3) && counts.include?(2) ? array.sum : 0
 
-    sorted_dice = array.uniq.sort
-    caluculated_scores["small_straight"] = check_s_straight(sorted_dice) == true ? 15 : 0
+    caluculated_scores["small_straight"] = check_s_straight(array) == true ? 15 : 0
 
-    sorted_dice = array.uniq.sort
-    caluculated_scores["big_straight"] = check_b_straight(sorted_dice) == true ? 30 : 0
+    caluculated_scores["big_straight"] = check_b_straight(array) == true ? 30 : 0
 
     caluculated_scores["yacht"] = array.uniq.size == 1 ? 50 : 0
 
     caluculated_scores
   end
 
-  def self.check_s_straight(sorted_array)
+  def self.check_s_straight(array)
+    sorted_array = array.uniq.sort
     sorted_array.each_cons(4) do |subarray|
       if subarray.each_cons(2).all? { |a, b| b == a + 1 }
         return true
@@ -98,7 +97,8 @@ class Game < ApplicationRecord
     end
   end
 
-  def self.check_b_straight(sorted_array)
+  def self.check_b_straight(array)
+    sorted_array = array.uniq.sort
     sorted_array.each_cons(5) do |subarray|
       if subarray.each_cons(2).all? { |a, b| b == a + 1 }
         return true
