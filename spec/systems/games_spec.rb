@@ -41,7 +41,10 @@ RSpec.describe "Games", type: :system, js: true do
 
     it "サイコロを全てキープしたらサイコロを振るボタンが存在しないこと" do
       click_on "サイコロを振る"
-      5.times { first(:css, ".table-dice").click sleep(3) }
+      5.times do
+        first(:css, ".table-dice").click
+        sleep(5)
+      end
 
       expect(page.has_no_link?("サイコロを振る")).to be_truthy
     end
