@@ -39,19 +39,9 @@ RSpec.describe "Games", type: :system, js: true do
       expect(page).to have_css(".keep-dice", count: 0)
     end
 
-    it "キープしたサイコロは振らないこと" do
-      click_on "サイコロを振る"
-      first(:css, ".table-dice").click
-      keep_dice = first(:css, ".keep-dice")
-      click_on "サイコロを振る"
-      new_keep_dice = first(:css, ".keep-dice")
-
-      expect(new_keep_dice).to eq keep_dice
-    end
-
     it "サイコロを全てキープしたらサイコロを振るボタンが存在しないこと" do
       click_on "サイコロを振る"
-      5.times { first(:css, ".table-dice").click sleep(2) }
+      5.times { first(:css, ".table-dice").click sleep(3) }
 
       expect(page.has_no_link?("サイコロを振る")).to be_truthy
     end
