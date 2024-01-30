@@ -5,8 +5,8 @@
   <div class="row justify-content-center">
     <ul class="text-center">
       <li><i class="bi bi-rounded-right"></i> <strong>アカウント名:</strong><%= @user.username %></li>
-      <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong> 123 </li>
-      <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong> 123</li>
+      <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong><%= @number_of_play %></li>
+      <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong><%= @max_point %></li>
     </ul>
     <% if @user == current_user %>
       <%= link_to "プロフィール編集", edit_profile_path, class: "col-10 col-lg-6 text-center" %>

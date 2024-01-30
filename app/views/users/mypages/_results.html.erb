@@ -1,0 +1,21 @@
+<h3>ゲーム結果</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">合計点</th>
+      <th scope="col">日付</th>
+      <th scope="col">詳細</th>
+      <th scope="col">削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+        <th scope="row"><%= result.sum %></th>
+        <td><%= result.updated_at %></td>
+        <td>詳細</td>
+        <td>削除</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
