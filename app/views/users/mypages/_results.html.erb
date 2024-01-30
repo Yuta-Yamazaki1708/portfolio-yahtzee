@@ -1,5 +1,6 @@
+<%= turbo_frame_tag "result" do %>
 <h3>ゲーム結果</h3>
-<table class="table">
+<table class="table table-hover table-responsive">
   <thead>
     <tr>
       <th scope="col">合計点</th>
@@ -13,9 +14,10 @@
       <tr>
         <th scope="row"><%= result.sum %></th>
         <td><%= result.updated_at %></td>
-        <td>詳細</td>
+        <td><%= link_to "詳細", result_path(result) %></td>
         <td>削除</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% end %>
