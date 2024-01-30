@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   root "home#index"
   
   devise_scope :user do
-    get "/user/profile/:id", to: "users/registrations#show_profile", as: "profile"
-    get "/user/edit_profile", to: "users/registrations#edit_profile", as: "edit_profile"
-    patch "user/update_profile", to: "users/registrations#update_profile", as: "update_profile"
     post "user/guest_sign_in", to: "users/sessions#guest_sign_in", as: "guest_sign_in"
   end
+
+  get "/user/profile/:id", to: "users/mypages#show", as: "profile"
+  get "/user/edit_profile", to: "users/mypages#edit", as: "edit_profile"
+  patch "user/update_profile", to: "users/mypages#update", as: "update_profile"
 
   post "/new_game", to: "games#new_game", as: "new_game"
   get "/game", to: "games#game", as: "game"

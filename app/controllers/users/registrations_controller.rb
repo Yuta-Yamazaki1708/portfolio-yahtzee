@@ -15,24 +15,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def show_profile
-    @user = User.find(params[:id])
-  end
-
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-    @user = current_user
-    if @user.update(profile_params)
-      flash.now.notice = "プロフィールを更新しました。"
-      render "update_profile", formats: :turbo_stream
-    else
-      render action: :edit_profile, status: :unprocessable_entity
-    end
-  end
-
   def update
     super
     if current_user.update(account_params)
