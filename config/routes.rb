@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   patch "/select_category", to: "games#select_category", as: "select_category"
   get "/get_roll_count", to: "games#get_roll_count"
   get "/result/:id", to: "results#show", as: "result"
+  delete "/result/:id", to: "results#destroy"
 end

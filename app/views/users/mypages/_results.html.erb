@@ -10,14 +10,15 @@
     </tr>
   </thead>
   <tbody>
-    <% @results.each do |result| %>
+    <% @results.each do |result| if @results %>
       <tr>
         <th scope="row"><%= result.sum %></th>
         <td><%= result.updated_at %></td>
         <td><%= link_to "詳細", result_path(result) %></td>
-        <td>削除</td>
+        <td><%= link_to "削除", result_path(result), data: { turbo_method: :delete, turbo_confirm: "結果を削除してもよろしいですか？" } %></td>
       </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>
 <% end %>

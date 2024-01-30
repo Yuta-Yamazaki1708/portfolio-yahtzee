@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "result" do %>
+  <div class="container">
+    <p><%= link_to "戻る", profile_path(@user) %></p>
+    <table class="table table-hover table-responsive">
+      <tbody>
+        <% @result.each do |category| %>
+          <tr>
+            <th scope="row"><%= category.first %></th>
+            <td><%= category.last %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
