@@ -1,0 +1,25 @@
+td a {
+  color: gray;
+  display: block;
+}
+
+.result {
+  font-weight: bold;
+}
+
+.dice-container {
+  min-height: 150px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1080deg);
+  }
+}
+
+.rolling {
+  animation: rotate 1s infinite;
+}

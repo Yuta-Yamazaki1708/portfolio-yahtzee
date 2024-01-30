@@ -1,0 +1,32 @@
+<% content_for :css do %>
+  <%= stylesheet_link_tag "game" %>
+
+<% end %>
+
+<main id="main">
+  <section class="align-items-center">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-md-6 col-12">
+          <h1>Result</h1>
+
+          <%= turbo_frame_tag "results" do %>
+            <%= render partial: "results",
+              locals: results_locals(@game, @categories_and_results, @calculated_scores)
+            %>
+          <% end %>
+
+        </div>
+        <div class="col-md-6 col-12" data-turbo="true">
+
+          <%= turbo_frame_tag "field" do %>
+            <%= render partial: "field",
+              locals: field_locals(@game, @table_dices, @keep_dices)
+            %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

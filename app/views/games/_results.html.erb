@@ -1,0 +1,22 @@
+<table class="table table-hover table-responsive">
+  <tbody>
+    <% categories_and_results.each do |category, result| %>
+      <tr>
+        <th scope="row"><%= category %></th>
+        <% if result %>
+          <td colspan="2" class="result"><%= result %></td>
+        <% elsif calculated_scores[category] %>
+          <td colspan="2">
+            <%= link_to calculated_scores[category],
+              select_category_path(select_category_params(category)),
+              data: { "turbo-method": :patch },
+              class: "calculated_scores"
+            %>
+          </td>
+        <% else %>
+          <td colspan="2">0</td>
+        <% end %>
+      </tr>
+    <% end %>
+   </tbody>
+</table>

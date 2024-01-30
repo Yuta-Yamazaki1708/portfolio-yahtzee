@@ -7,16 +7,13 @@
     <h1>Yahtzee</h1>
     <div class="text-center" data-turbo="true">
       <% if user_signed_in? %>
-        <%= link_to "プレイする", root_path , class: "btn-link" %>
+        <%= link_to "プレイする", new_game_path , class: "btn-link", data: {"turbo-method": :post} %>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6"%>
+        <%= link_to "ログイン", new_user_session_path, class: "btn-link col-6" %>
         <%= link_to "ゲストログイン", guest_sign_in_path, data: {"turbo-method": :post}, class: "btn-link col-6" %>
-        <%= link_to "プレイする", root_path , class: "btn-link col-6" %>
+        <%= link_to "プレイする", new_game_path , class: "btn-link col-6", data: {"turbo-method": :post} %>
       <% end %>
     </div>
   </div>
 </section>
-<div>
 
-
-</div>
