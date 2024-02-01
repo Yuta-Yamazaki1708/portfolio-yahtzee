@@ -13,7 +13,7 @@
     <% @results.each do |result| if @results %>
       <tr>
         <th scope="row"><%= result.sum %></th>
-        <td><%= result.updated_at %></td>
+        <td><%= l result.updated_at %></td>
         <td><%= link_to "詳細", result_path(result) %></td>
         <td><%= link_to "削除", result_path(result), data: { turbo_method: :delete, turbo_confirm: "結果を削除してもよろしいですか？" } %></td>
       </tr>
