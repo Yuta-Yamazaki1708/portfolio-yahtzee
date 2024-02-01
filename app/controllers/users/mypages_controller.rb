@@ -4,7 +4,7 @@ class Users::MypagesController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @results = @user.games
+    @results = @user.games.page(params[:page])
     @number_of_play = @user.games.count
     @max_point = @results.maximum(:sum)
   end

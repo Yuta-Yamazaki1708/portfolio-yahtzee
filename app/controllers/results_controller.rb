@@ -6,7 +6,7 @@ class ResultsController < ApplicationController
 
   def destroy
     @user = current_user
-    @results = @user.games
+    @results = @user.games.page(params[:page])
     @result = Game.find(params[:id])
     @result.destroy
     flash.now.notice = "結果を削除しました。"

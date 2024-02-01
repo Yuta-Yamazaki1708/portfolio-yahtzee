@@ -46,7 +46,7 @@ gem 'jquery-rails'
 gem 'mini_racer', platforms: :ruby
 gem 'execjs'
 gem 'rails-i18n'
-
+gem 'kaminari'
 gem 'devise'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
