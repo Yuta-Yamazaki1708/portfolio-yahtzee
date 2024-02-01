@@ -5,7 +5,7 @@
       <tbody>
         <% @result.each do |category| %>
           <tr>
-            <th scope="row"><%= category.first %></th>
+            <th scope="row"><%= t "results.#{category.first}" %></th>
             <td><%= category.last %></td>
           </tr>
         <% end %>

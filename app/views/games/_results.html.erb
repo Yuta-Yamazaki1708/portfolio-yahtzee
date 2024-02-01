@@ -2,7 +2,7 @@
   <tbody>
     <% categories_and_results.each do |category, result| %>
       <tr>
-        <th scope="row"><%= category %></th>
+        <th scope="row"><%= t "results.#{category}" %></th>
         <% if result %>
           <td colspan="2" class="result"><%= result %></td>
         <% elsif calculated_scores[category] %>

@@ -45,6 +45,7 @@ gem 'bootstrap', '5.3.2'
 gem 'jquery-rails'
 gem 'mini_racer', platforms: :ruby
 gem 'execjs'
+gem 'rails-i18n'
 
 gem 'devise'
 gem 'omniauth-rails_csrf_protection'
