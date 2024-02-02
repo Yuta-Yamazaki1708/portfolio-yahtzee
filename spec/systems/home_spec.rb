@@ -15,7 +15,7 @@ RSpec.describe "Homes", type: :system do
 
   it "home画面へのリンクをクリックしたとき、home画面へ遷移できること" do
     within('header') do
-      click_on "Home"
+      click_on "ホーム"
       expect(current_path).to eq root_path
     end
   end
