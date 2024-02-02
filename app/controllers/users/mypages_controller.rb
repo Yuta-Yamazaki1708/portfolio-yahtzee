@@ -1,5 +1,5 @@
 class Users::MypagesController < ApplicationController
-  before_action :only_signed_in_user, only: [:edit]
+  before_action :authenticate_user!, only: [:edit]
   before_action :ensure_guest_user, only: [:update]
 
   def show
@@ -34,13 +34,6 @@ class Users::MypagesController < ApplicationController
     if @user.email == "guest@example.com"
       flash.now.alert = "ゲストユーザーは編集、退会ができません。"
       render "ensure_guest_user", formats: :turbo_stream
-    end
-  end
-
-  def only_signed_in_user
-    unless user_signed_in?
-      redirect_to new_user_session_path
-      flash.alert = "ログインもしくはアカウント登録してください。"
     end
   end
 end
