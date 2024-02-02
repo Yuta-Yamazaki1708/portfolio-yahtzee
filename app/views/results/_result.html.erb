@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "result" do %>
   <div class="container">
-    <p><%= link_to "戻る", profile_path(@user) %></p>
+    <p><%= link_to "戻る", :back %></p>
     <table class="table table-hover table-responsive">
       <tbody>
         <% @result.each do |category| %>
