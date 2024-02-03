@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   get "/get_roll_count", to: "games#get_roll_count"
   get "/result/:id", to: "results#show", as: "result"
   delete "/result/:id", to: "results#destroy"
-  get "/ranking", to: "ranks#index", as: "ranking"
+  get "/ranking", to: "ranks#all", as: "ranking"
+  get "/ranking/weekly", to: "ranks#weekly", as: "weekly_ranking"
 end
