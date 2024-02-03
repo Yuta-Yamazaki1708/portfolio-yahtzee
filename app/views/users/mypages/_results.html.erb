@@ -6,13 +6,13 @@
       <th scope="col"><%= sort_link("sum", "合計") %></th>
       <th scope="col"><%= sort_link("updated_at", "日付") %></th>
       <th scope="col">詳細</th>
-      <% if @user == current_user %>
+      <% if user == current_user %>
         <th scope="col">削除</th>
       <% end %>
     </tr>
   </thead>
   <tbody>
-    <% @results.each do |result| if @results %>
+    <% results.each do |result| if results %>
       <tr>
         <th scope="row"><%= result.sum %></th>
         <td><%= l result.updated_at %></td>
@@ -25,5 +25,5 @@
   <% end %>
   </tbody>
 </table>
-<%= paginate @results %>
+<%= paginate results %>
 <% end %>

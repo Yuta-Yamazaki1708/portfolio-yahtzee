@@ -12,11 +12,15 @@
       <div class="row justify-content-between">
         <div class="profile col-12 col-lg-5">
 
-          <%= render partial: "profile" %>
+          <%= render partial: "users/mypages/profile",
+            locals: { user: @user, number_of_play: @number_of_play, max_point: @max_point }
+          %>
 
        </div>
         <div class=" col-12 col-lg-6 result">
-          <%= render partial: "results" %>
+          <%= render partial: "users/mypages/results",
+            locals: { user: @user, results: @results }
+          %>
         </div>
       </div>
     </div>

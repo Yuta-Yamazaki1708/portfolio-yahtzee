@@ -5,7 +5,9 @@
         <h2>ランキング</h2>
       </div>
 
-      <%= render partial: "ranks/all_ranking", locals: { ranks: @ranks, current_page: @current_page } %>
+      <%= render partial: "ranks/all_ranking",
+        locals: { ranks: @ranks, current_page: @current_page }
+      %>
 
     </div>
   </section>

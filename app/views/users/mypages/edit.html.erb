@@ -3,4 +3,6 @@
   <%= stylesheet_link_tag "turbo_form" %>
 <% end %>
 
-<%= render partial: "form" %>
+<%= render partial: "users/mypages/form",
+  locals: { user: @user }
+%>

@@ -1,1 +1,14 @@
-<%= render "result" %>
+<main id="main">
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>ゲーム結果</h2>
+      </div>
+
+      <%= render partial: "results/result",
+        locals: { result: @result }
+      %>
+
+    </div>
+  </section>
+</main>
