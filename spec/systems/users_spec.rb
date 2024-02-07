@@ -246,6 +246,7 @@ RSpec.describe "Users", type: :system, js: true do
 
     it "合計の昇順で表示できること" do
       click_on("合計⌄")
+      sleep 1
 
       expect(page.text).to match %r{#{game1.sum}[\s\S]*#{game3.sum}[\s\S]*#{game2.sum}}
       expect(page).to have_content "合計^"
@@ -254,6 +255,7 @@ RSpec.describe "Users", type: :system, js: true do
     it "合計の降順で表示できること" do
       click_on("合計⌄")
       click_on("合計^")
+      sleep 1
 
       expect(page.text).to match %r{#{game2.sum}[\s\S]*#{game3.sum}[\s\S]*#{game1.sum}}
       expect(page).to have_content "合計⌄"
