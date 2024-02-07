@@ -202,4 +202,61 @@ RSpec.describe "Users", type: :system, js: true do
       User.exists?(id: guest_user_id).should be_truthy
     end
   end
+
+  describe "ゲーム結果" do
+    let(:game1) { build(:game, sum: 100) }
+    let(:game2) { build(:game, sum: 200) }
+    let(:game3) { create(:game, sum: 150) }
+    let(:user) { create(:user, games: [game1, game2, game3]) }
+
+    before do
+      user.icon.attach(fixture_file_upload('icon.jpg'))
+      sign_in user
+      visit profile_path(user)
+    end
+
+    it "ゲーム結果が表示されること" do
+      within(".result") do
+        expect(page). to have_content 200
+      end
+    end
+
+    it "プレイ回数が表示されること" do
+      within(".profile") do
+        expect(page).to have_content 3
+      end
+    end
+
+    it "ハイスコアが表示されること" do
+      within(".profile") do
+        expect(page).to have_content 200
+      end
+    end
+
+    it "日付の降順で表示されること" do
+      expect(page.text).to match %r{#{game3.sum}[\s\S]*#{game2.sum}[\s\S]*#{game1.sum}}
+    end
+
+    it "日付の昇順で表示できること" do
+      click_on("日付⌄")
+
+      expect(page.text).to match %r{#{game1.sum}[\s\S]*#{game2.sum}[\s\S]*#{game3.sum}}
+      expect(page).to have_content "日付^"
+    end
+
+    it "合計の降順で表示できること" do
+      click_on("合計⌄")
+
+      expect(page.text).to match %r{#{game1.sum}[\s\S]*#{game3.sum}[\s\S]*#{game2.sum}}
+      expect(page).to have_content "合計^"
+    end
+
+    it "合計の降順で表示できること" do
+      click_on("合計⌄")
+      click_on("合計^")
+
+      expect(page.text).to match %r{#{game2.sum}[\s\S]*#{game3.sum}[\s\S]*#{game1.sum}}
+      expect(page).to have_content "合計⌄"
+    end
+  end
 end
