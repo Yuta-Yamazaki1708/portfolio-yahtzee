@@ -244,7 +244,7 @@ RSpec.describe "Users", type: :system, js: true do
       expect(page).to have_content "日付^"
     end
 
-    it "合計の降順で表示できること" do
+    it "合計の昇順で表示できること" do
       click_on("合計⌄")
 
       expect(page.text).to match %r{#{game1.sum}[\s\S]*#{game3.sum}[\s\S]*#{game2.sum}}
