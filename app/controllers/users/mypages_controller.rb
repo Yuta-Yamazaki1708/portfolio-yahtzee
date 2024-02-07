@@ -5,7 +5,7 @@ class Users::MypagesController < ApplicationController
   def show
     @user = User.find(params[:id])
     column = params[:sort_column] || :updated_at
-    order = params[:sort_order] == 'desc' ? 'desc' : 'asc'
+    order = params[:sort_order] == 'asc' ? 'asc' : 'desc'
     @results = @user.games.order(column => order).page(params[:page])
     @number_of_play = @user.games.count
     @max_point = @results.maximum(:sum)
