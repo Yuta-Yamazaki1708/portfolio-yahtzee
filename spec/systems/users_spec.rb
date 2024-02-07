@@ -239,6 +239,7 @@ RSpec.describe "Users", type: :system, js: true do
 
     it "日付の昇順で表示できること" do
       click_on("日付⌄")
+      sleep 1
 
       expect(page.text).to match %r{#{game1.sum}[\s\S]*#{game2.sum}[\s\S]*#{game3.sum}}
       expect(page).to have_content "日付^"
