@@ -218,6 +218,8 @@ RSpec.describe "Users", type: :system, js: true do
     it "ゲーム結果が表示されること" do
       within(".result") do
         expect(page). to have_content 200
+        expect(page). to have_content 150
+        expect(page). to have_content 100
       end
     end
 
@@ -260,6 +262,31 @@ RSpec.describe "Users", type: :system, js: true do
 
       expect(page.text).to match %r{#{game2.sum}[\s\S]*#{game3.sum}[\s\S]*#{game1.sum}}
       expect(page).to have_content "合計⌄"
+    end
+  end
+
+  describe "ページネーションテスト" do
+    before do
+      games = create_list(:game, 11)
+      user = create(:user, games: games)
+      user.icon.attach(fixture_file_upload('icon.jpg'))
+      sign_in user
+      visit profile_path(user)
+    end
+
+    it "1ページ目に表示される結果は10個であること" do
+      within('table') do
+        num = page.all("tr").count - 1
+        expect(num).to eq 10
+      end
+    end
+
+    it "2ページ目に表示される結果は1個であること" do
+      click_on("次へ ›")
+      within('table') do
+        num = page.all("tr").count - 1
+        expect(num).to eq 1
+      end
     end
   end
 end
