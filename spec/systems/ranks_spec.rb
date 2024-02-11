@@ -34,8 +34,10 @@ RSpec.describe "Ranks", type: :system, js: true do
 
     it "2ページ目に表示される結果は1個であること" do
       click_on("次へ ›")
-      num = page.all("tr").count - 1
-      expect(num).to eq 1
+      within('table') do
+        num = page.all("tr").count - 1
+        expect(num).to eq 1
+      end
     end
   end
 end
