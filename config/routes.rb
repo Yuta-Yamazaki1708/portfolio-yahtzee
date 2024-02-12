@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   delete "/result/:id", to: "results#destroy"
   get "/ranking", to: "ranks#all", as: "ranking"
   get "/ranking/weekly", to: "ranks#weekly", as: "weekly_ranking"
+  get "/rules", to: "rules#index", as: "rules"
 end
