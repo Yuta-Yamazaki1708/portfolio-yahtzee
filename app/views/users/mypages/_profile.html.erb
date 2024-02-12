@@ -1,0 +1,15 @@
+<%= turbo_frame_tag user do %>
+  <div class="text-center">
+    <%= image_tag user.icon.variant(:display), class: "icon", alt: "アイコン" %>
+  </div>
+  <div class="row justify-content-center">
+    <ul class="text-center">
+      <li><i class="bi bi-rounded-right"></i> <strong>アカウント名:</strong><%= user.username %></li>
+      <li><i class="bi bi-rounded-right"></i> <strong>プレイ回数:</strong><%= number_of_play %></li>
+      <li><i class="bi bi-rounded-right"></i> <strong>ハイスコア:</strong><%= max_point %></li>
+    </ul>
+    <% if user == current_user %>
+      <%= link_to "プロフィール編集", edit_profile_path, class: "col-10 col-lg-6 text-center" %>
+    <% end %>
+  </div>
+<% end %>

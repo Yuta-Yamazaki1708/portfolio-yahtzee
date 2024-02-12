@@ -9,35 +9,58 @@ RSpec.describe "Homes", type: :system do
   it "logoをクリックしたとき、home画面へ遷移できること" do
     within('.logo') do
       click_on "Yahtzee"
-      expect(current_path).to eq root_path
     end
+    expect(current_path).to eq root_path
   end
 
   it "home画面へのリンクをクリックしたとき、home画面へ遷移できること" do
     within('header') do
-      click_on "Home"
-      expect(current_path).to eq root_path
+      click_on "ホーム"
     end
+    expect(current_path).to eq root_path
   end
 
-  it "ヘッダーのログインボタンをクリックしたとき、ログイン画面へ遷移できること" do
+  it "ヘッダーのログインリンクをクリックしたとき、ログイン画面へ遷移できること" do
     within('header') do
       click_on "ログイン"
-      expect(current_path).to eq new_user_session_path
     end
+    expect(current_path).to eq new_user_session_path
   end
 
-  it "ヘッダーの新規登録ボタンをクリックしたとき、新規登録画面へ遷移できること" do
+  it "ヘッダーの新規登録リンクをクリックしたとき、新規登録画面へ遷移できること" do
     within('header') do
       click_on "新規登録"
-      expect(current_path).to eq new_user_registration_path
     end
+    expect(current_path).to eq new_user_registration_path
+  end
+
+  it "ヘッダーのプレイボタンをクリックしたとき、ゲーム画面へ遷移できること" do
+    within('header') do
+      click_on "プレイ"
+      sleep(1)
+    end
+    expect(current_path).to eq game_path
+  end
+
+  it "ヘッダーのランキングリンクをクリックしたとき、ランキング画面へ遷移できること" do
+    within('header') do
+      click_on "ランキング"
+    end
+    expect(current_path).to eq ranking_path
   end
 
   it "メインのログインボタンをクリックしたとき、ログイン画面へ遷移できること" do
     within('#hero') do
       click_on "ログイン"
-      expect(current_path).to eq new_user_session_path
     end
+    expect(current_path).to eq new_user_session_path
+  end
+
+  it "メインのプレイするボタンをクリックしたとき、ゲーム画面へ遷移すること" do
+    within('#hero') do
+      click_on "プレイする"
+      sleep(1)
+    end
+    expect(current_path).to eq game_path
   end
 end

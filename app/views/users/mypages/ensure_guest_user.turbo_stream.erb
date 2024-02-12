@@ -1,5 +1,7 @@
 <%= turbo_stream.replace @user do %>
-  <%= render "profile" %>
+  <%= render partial: "users/mypages/profile",
+    locals: { user: @user, number_of_play: @number_of_play, max_point: @max_point }
+  %>
 <% end %>
 
 <%= turbo_stream.replace "icon" do %>

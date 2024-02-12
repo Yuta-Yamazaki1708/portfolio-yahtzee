@@ -5,7 +5,7 @@
 <% end %>
 
 <%= turbo_stream.replace "icon" do %>
-  <a href="#"><%= image_tag(@user.icon.variant(:thumb), class: "icon", alt: "アイコン") %></a>
+  <a href="#"><%= image_tag(@user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %></a>
 <% end %>
 
 <%= turbo_stream.update "flash", partial: "shared/flash" %>

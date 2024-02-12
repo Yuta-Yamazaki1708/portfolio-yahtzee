@@ -45,7 +45,8 @@ gem 'bootstrap', '5.3.2'
 gem 'jquery-rails'
 gem 'mini_racer', platforms: :ruby
 gem 'execjs'
-
+gem 'rails-i18n'
+gem 'kaminari'
 gem 'devise'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
@@ -71,6 +72,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'bullet'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

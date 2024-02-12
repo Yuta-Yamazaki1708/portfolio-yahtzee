@@ -446,3 +446,19 @@ section {
   background: #3dc8b7;
   color: #fff;
 }
+
+.pagenation {
+  color: #34b7a7;
+}
+
+.pagenation:hover {
+  color: #3dc8b7;
+}
+
+.active-pagenation {
+  color: white;
+  background-color: #34b7a7!important;
+  border-color: #34b7a7!important;
+}
+
+

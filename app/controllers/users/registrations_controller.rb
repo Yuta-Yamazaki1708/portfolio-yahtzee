@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :only_signed_in_user, only: [:edit_profile]
-  before_action :ensure_guest_user, only: [:update_profile, :update, :destroy]
+  before_action :ensure_guest_user, only: [:update, :destroy]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -12,24 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     if resource.save
       flash.notice = "新規登録が完了しました。"
-    end
-  end
-
-  def show_profile
-    @user = User.find(params[:id])
-  end
-
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-    @user = current_user
-    if @user.update(profile_params)
-      flash.now.notice = "プロフィールを更新しました。"
-      render "update_profile", formats: :turbo_stream
-    else
-      render action: :edit_profile, status: :unprocessable_entity
     end
   end
 
@@ -46,10 +27,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def profile_params
-    params.require(:user).permit(:username, :icon)
-  end
 
   def account_params
     params.require(:user).permit(:email, :password)

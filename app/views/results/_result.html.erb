@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "result" do %>
+  <div class="container">
+    <p data-turbo="false"><%= link_to "戻る", :back %></p>
+    <table class="table table-hover table-responsive">
+      <tbody>
+        <% result.each do |category| %>
+          <tr>
+            <th scope="row"><%= t "results.#{category.first}" %></th>
+            <td><%= category.last %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
