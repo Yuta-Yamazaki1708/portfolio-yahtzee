@@ -44,6 +44,7 @@
           <div class="row text-center justify-content-center">
               <span>または</span>
               <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn-link col-md-6 col-12"%>
+              <%= button_to "ゲストログイン", guest_sign_in_path, class: "btn-link col-md-6 col-12" %>
               <%= link_to "ログインはこちら", new_user_session_path %>
           </div>
         </div>
