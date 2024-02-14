@@ -79,4 +79,12 @@ RSpec.describe "Homes", type: :system do
     end
     expect(current_path).to eq rules_path
   end
+
+  it "メインのランキングボタンをクリックしたとき、ランキング画面へ遷移すること" do
+    within('#hero') do
+      click_on "ランキング"
+      sleep(1)
+    end
+    expect(current_path).to eq ranking_path
+  end
 end

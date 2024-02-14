@@ -90,6 +90,20 @@ RSpec.describe "Games", type: :system, js: true do
       expect(current_path).to eq root_path
     end
 
+    it "ゲーム終了後、ランキングへ遷移できること" do
+      12.times do
+        click_on "サイコロを振る"
+        first(:css, ".calculated_scores").click
+      end
+      sleep(1)
+      within "main" do
+        click_on "ランキング"
+      end
+      sleep(1)
+
+      expect(current_path).to eq ranking_path
+    end
+
     it "途中でリロードした場合ゲームを中止し、ホームに戻ること" do
       click_on "サイコロを振る"
       first(:css, ".calculated_scores").click
