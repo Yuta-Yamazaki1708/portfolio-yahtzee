@@ -32,7 +32,7 @@ Yahtzee
 <img src="https://img.shields.io/badge/-Amazon_S3-569A31.svg?logo=amazon_s3&logoColor=white&style=flat">
 
 ## ER図
-[ER図](https://github.com/user-attachments/files/16093689/erd.pdf)
+<a href="https://github.com/Yuta-Yamazaki1708/portfolio-yahtzee/blob/rules/erd.pdf">ER図</a>
 
 ## アプリケーションについて
 アプリケーションは、ログインして利用することができます。
@@ -93,4 +93,8 @@ B.ストレート
 ヤツィー
 同じ種類のサイコロが5つの場合、50点
 
-## その他こだわりのポイント
+## こだわりポイント
+Hotwireのうち、TurboとStimulusを利用し、アプリケーションの一部をSPAのように動作させています。
+GoogleAPIを利用し、既存のGoogleアカウントでログインできるようにしています。
+ゲームのターン数やサイコロを振った回数をrailsのsessionを利用して管理しています。
+
