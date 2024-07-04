@@ -166,8 +166,24 @@ RSpec.describe "Users", type: :system, js: true do
       expect(page).to have_content "すでにログインしています。"
     end
 
-    it "ゲストログインができること" do
+    it "ホーム画面からゲストログインができること" do
       visit root_path
+
+      click_on "ゲストログイン"
+
+      expect(page).to have_content "ゲストユーザーでログインしました。"
+    end
+
+    it "ログイン画面からゲストログインができること" do
+      visit new_user_session_path
+
+      click_on "ゲストログイン"
+
+      expect(page).to have_content "ゲストユーザーでログインしました。"
+    end
+
+    it "新規登録画面からゲストログインができること" do
+      visit new_user_registration_path
 
       click_on "ゲストログイン"
 

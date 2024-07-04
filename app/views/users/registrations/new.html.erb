@@ -1,3 +1,7 @@
+<% content_for :title do %>
+  新規登録
+<% end %>
+
 <% content_for :css do %>
   <%= stylesheet_link_tag 'form' %>
 <% end %>
@@ -44,6 +48,7 @@
           <div class="row text-center justify-content-center">
               <span>または</span>
               <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn-link col-md-6 col-12"%>
+              <%= button_to "ゲストログイン", guest_sign_in_path, class: "btn-link col-md-6 col-12" %>
               <%= link_to "ログインはこちら", new_user_session_path %>
           </div>
         </div>

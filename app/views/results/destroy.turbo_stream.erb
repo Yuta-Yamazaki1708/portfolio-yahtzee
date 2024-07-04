@@ -1,5 +1,7 @@
 <%= turbo_stream.update "result" do %>
-  <%= render "users/mypages/results" %>
+  <%= render partial: "users/mypages/results",
+    locals: { user: @user, results: @results }
+  %>
 <% end %>
 
 <%= turbo_stream.update "flash", partial: "shared/flash" %>

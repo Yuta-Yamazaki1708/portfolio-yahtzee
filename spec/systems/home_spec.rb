@@ -42,6 +42,14 @@ RSpec.describe "Homes", type: :system do
     expect(current_path).to eq game_path
   end
 
+  it "ヘッダーのプレイボタンをクリックしたとき、ゲーム画面へ遷移できること" do
+    within('header') do
+      click_on "ルール"
+      sleep(1)
+    end
+    expect(current_path).to eq rules_path
+  end
+
   it "ヘッダーのランキングリンクをクリックしたとき、ランキング画面へ遷移できること" do
     within('header') do
       click_on "ランキング"
@@ -62,5 +70,21 @@ RSpec.describe "Homes", type: :system do
       sleep(1)
     end
     expect(current_path).to eq game_path
+  end
+
+  it "メインのルールボタンをクリックしたとき、ルール画面へ遷移すること" do
+    within('#hero') do
+      click_on "ルール"
+      sleep(1)
+    end
+    expect(current_path).to eq rules_path
+  end
+
+  it "メインのランキングボタンをクリックしたとき、ランキング画面へ遷移すること" do
+    within('#hero') do
+      click_on "ランキング"
+      sleep(1)
+    end
+    expect(current_path).to eq ranking_path
   end
 end

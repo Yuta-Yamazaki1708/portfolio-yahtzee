@@ -5,9 +5,9 @@
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><%= link_to "ホーム", root_path, class: "active"%></li>
-        <li><a href="about.html">Rules</a></li>
+        <li><%= link_to "ホーム", root_path %></li>
         <li data-turbo="true"><%= link_to "プレイ", new_game_path, data: { "turbo-method": :post } %></li>
+        <li><%= link_to "ルール", rules_path %></li>
         <li><%= link_to "ランキング", ranking_path %></li>
         <% if user_signed_in? %>
           <li class="dropdown">

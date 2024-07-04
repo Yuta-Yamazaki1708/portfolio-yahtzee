@@ -1,0 +1,99 @@
+<% content_for :title do %>
+  ルール
+<% end %>
+
+<% content_for :css do %>
+  <%= stylesheet_link_tag "rules" %>
+<% end %>
+
+<main id="main">
+  <section class="align-items-center">
+    <div class="container">
+      <div class="section-title">
+        <h2>ルール</h2>
+      </div>
+      <div>
+        <div>
+          <h3>Yahtzee(ヤツィー)とは</h3>
+          <p>Yahtzee(ヤツィー)またはYacht(ヨット)とは、サイコロを使ったポーカーのようなゲームです。サイコロを振って役を作り、点数を競います。</p>
+        </div>
+        <div class="row gy-20">
+          <h3>ゲームの進め方</h3>
+          <div class="row">
+            <h5>1.サイコロを振る</h5>
+            <%= image_tag "rules/role.png", class: "col-sm-12 col-md-6", alt: "サイコロを振る" %>
+            <p class="col-sm-12 col-md-6">サイコロを振るボタンをクリックするとサイコロを振ることができます。１ターンにサイコロを振れる最大回数は3回までです。</p>
+          </div>
+          <div class="row">
+            <h5>2.サイコロをキープする</h5>
+            <%= image_tag "rules/keep.png", class: "col-sm-12 col-md-6", alt: "キープするサイコロを選択する" %>
+            <p class="col-sm-12 col-md-6">振ったサイコロはキープすることができます。キープしたサイコロは次のサイコロを振るアクションでシャッフルせずに取っておくことができます。画像の例だと５、５はシャッフルせず、３、３、１のみシャッフルすることができます。</p>
+          </div>
+          <div class="row">
+            <h5>3.役を選択する</h5>
+            <%= image_tag "rules/select.png", class: "col-sm-12 col-md-6", alt: "役を選択する" %>
+            <p class="col-sm-12 col-md-6">3回のシャッフルまでに役を揃えましょう。役が揃ったら選択し、点数を確定させます。なお、サイコロを3回振る前に役を選択することもできます。</p>
+          </div>
+        </div>
+        <div>
+          <h3>役の説明</h3>
+          <div>
+            <h5>ワン</h5>
+            <p>1の合計</p>
+          </div>
+          <div>
+            <h5>ツー</h5>
+            <p>2の合計</p>
+          </div>
+          <div>
+            <h5>スリー</h5>
+            <p>3の合計</p>
+          </div>
+          <div>
+            <h5>フォー</h5>
+            <p>4の合計</p>
+          </div>
+          <div>
+            <h5>ファイブ</h5>
+            <p>5の合計</p>
+          </div>
+          <div>
+            <h5>シックス</h5>
+            <p>6の合計</p>
+          </div>
+          <div>
+            <h5>チョイス</h5>
+            <p>全てのサイコロの合計</p>
+          </div>
+          <div>
+            <h5>フォーダイス</h5>
+            <p>同じ種類のサイコロが4つ以上の場合、全てのサイコロの合計</p>
+          </div>
+          <div>
+            <h5>フルハウス</h5>
+            <p>同じ種類のサイコロが3つと2つある場合、全てのサイコロの合計</p>
+          </div>
+          <div>
+            <h5>S.ストレート</h5>
+            <p>4つ以上のサイコロが階段状になっている場合、15点</p>
+          </div>
+          <div>
+            <h5>B.ストレート</h5>
+            <p>5つのサイコロが階段状になっている場合、30点</p>
+          </div>
+          <div>
+            <h5>ヤツィー</h5>
+            <p>同じ種類のサイコロが5つの場合、50点</p>
+          </div>
+          <div>
+            <h5>特殊得点:ボーナス</h5>
+            <p>ワン、ツー、スリー、フォー、ファイブ、シックスの合計点が63点以上の場合、追加で35点得ることができる。</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <%= link_to "ホームに戻る", root_path, class: "btn-link" %>
+      </div>
+    </div>
+  </section>
+</main>
