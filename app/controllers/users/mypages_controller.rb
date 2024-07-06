@@ -1,6 +1,6 @@
 class Users::MypagesController < ApplicationController
   before_action :authenticate_user!, only: [:edit]
-  #before_action :ensure_guest_user, only: [:update]
+  # before_action :ensure_guest_user, only: [:update]
 
   def show
     @user = User.find(params[:id])
@@ -31,13 +31,13 @@ class Users::MypagesController < ApplicationController
     params.require(:user).permit(:username, :icon)
   end
 
-#  def ensure_guest_user
-#    @user = current_user
-#    @number_of_play = @user.games.count
-#    @max_point = @user.games.maximum(:sum)
-#    if @user.email == "guest@example.com"
-#      flash.now.alert = "ゲストユーザーは編集、退会ができません。"
-#      render "ensure_guest_user", formats: :turbo_stream
-#    end
-#  end
+  def ensure_guest_user
+    @user = current_user
+    @number_of_play = @user.games.count
+    @max_point = @user.games.maximum(:sum)
+    if @user.email == "guest@example.com"
+      flash.now.alert = "ゲストユーザーは編集、退会ができません。"
+      render "ensure_guest_user", formats: :turbo_stream
+    end
+  end
 end
