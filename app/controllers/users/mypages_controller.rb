@@ -1,6 +1,6 @@
 class Users::MypagesController < ApplicationController
   before_action :authenticate_user!, only: [:edit]
-  # before_action :ensure_guest_user, only: [:update]
+  before_action :ensure_guest_user, only: [:update]
 
   def show
     @user = User.find(params[:id])
