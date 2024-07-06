@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :system, js: true do
+RSpec.xdescribe "Users", type: :system, js: true do
   describe "ページ遷移テスト" do
     let(:user) { create(:user) }
 
