@@ -3,8 +3,8 @@
 <table class="table table-hover table-responsive">
   <thead>
     <tr>
-      <th scope="col"><%= sort_link("sum", "合計") %></th>
-      <th scope="col"><%= sort_link("updated_at", "日付") %></th>
+      <th scope="col"><%= sort_link(user, "sum", "合計") %></th>
+      <th scope="col"><%= sort_link(user, "updated_at", "日付") %></th>
       <th scope="col">詳細</th>
       <% if user == current_user %>
         <th scope="col">削除</th>
@@ -17,7 +17,7 @@
         <th scope="row"><%= result.sum %></th>
         <td><%= l result.updated_at %></td>
         <td><%= link_to "詳細", result_path(result) %></td>
-        <% if @user == current_user %>
+        <% if user == current_user %>
           <td><%= link_to "削除", result_path(result), data: { turbo_method: :delete, turbo_confirm: "結果を削除してもよろしいですか？" } %></td>
         <% end %>
       </tr>
