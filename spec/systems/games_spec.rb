@@ -11,6 +11,8 @@ RSpec.describe "Games", type: :system, js: true do
 
     before do
       visit root_path
+      click_on "ゲストログイン"
+      sleep(1)
       click_on "プレイする"
       sleep(1)
     end

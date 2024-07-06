@@ -34,7 +34,17 @@ RSpec.describe "Homes", type: :system do
     expect(current_path).to eq new_user_registration_path
   end
 
-  it "ヘッダーのプレイボタンをクリックしたとき、ゲーム画面へ遷移できること" do
+  it "非ログイン時、ヘッダーのプレイボタンをクリックしたとき、新規登録へ遷移できること" do
+    within('header') do
+      click_on "プレイ"
+      sleep(1)
+    end
+    expect(current_path).to eq new_user_registration_path
+  end
+
+  it "ログイン時、ヘッダーのプレイボタンをクリックしたとき、ゲーム画面へ遷移できること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('header') do
       click_on "プレイ"
       sleep(1)
@@ -43,6 +53,8 @@ RSpec.describe "Homes", type: :system do
   end
 
   it "ヘッダーのプレイボタンをクリックしたとき、ゲーム画面へ遷移できること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('header') do
       click_on "ルール"
       sleep(1)
@@ -51,6 +63,8 @@ RSpec.describe "Homes", type: :system do
   end
 
   it "ヘッダーのランキングリンクをクリックしたとき、ランキング画面へ遷移できること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('header') do
       click_on "ランキング"
     end
@@ -65,6 +79,8 @@ RSpec.describe "Homes", type: :system do
   end
 
   it "メインのプレイするボタンをクリックしたとき、ゲーム画面へ遷移すること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('#hero') do
       click_on "プレイする"
       sleep(1)
@@ -73,6 +89,8 @@ RSpec.describe "Homes", type: :system do
   end
 
   it "メインのルールボタンをクリックしたとき、ルール画面へ遷移すること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('#hero') do
       click_on "ルール"
       sleep(1)
@@ -81,6 +99,8 @@ RSpec.describe "Homes", type: :system do
   end
 
   it "メインのランキングボタンをクリックしたとき、ランキング画面へ遷移すること" do
+    click_on "ゲストログイン"
+    sleep(1)
     within('#hero') do
       click_on "ランキング"
       sleep(1)
