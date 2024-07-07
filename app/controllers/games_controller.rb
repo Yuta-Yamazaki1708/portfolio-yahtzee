@@ -20,7 +20,13 @@ class GamesController < ApplicationController
   end
 
   def game
-    @game = Game.find(session[:game_id])
+    if session[:game_id]
+      @game = Game.find(session[:game_id])
+    else
+      @game = Game.new
+      @game.save
+      session[:game_id] = @game.id
+    end
     @categories_and_results = @game.display_results
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
@@ -134,6 +140,7 @@ class GamesController < ApplicationController
       session[:turn_count] = nil
       game = Game.find(session[:game_id])
       game.destroy
+      session[:game_id] = nil
       flash.notice = "リロードされたためゲームを中止しました。"
 
       redirect_to root_path
