@@ -6,11 +6,6 @@
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><%= link_to "ホーム", root_path %></li>
-        <% if user_signed_in? %>
-          <li data-turbo="true"><%= link_to "プレイ", new_game_path, data: { "turbo-method": :post } %></li>
-        <% else %>
-          <li><%= link_to "プレイ", new_user_registration_path %></li>
-        <% end %>
         <li><%= link_to "ルール", rules_path %></li>
         <li><%= link_to "ランキング", ranking_path %></li>
         <% if user_signed_in? %>

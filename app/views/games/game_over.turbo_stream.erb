@@ -5,9 +5,11 @@
 <% end %>
 
 <%= turbo_stream.replace "field" do %>
-  <div class="row text-center">
-    <%= link_to "もう一度プレイ", new_game_path, data: { "turbo-method": :post }, class: "btn-link col-10" %>
-    <%= link_to "ホームに戻る", root_path, class: "btn-link col-10" %>
-    <%= link_to "ランキング", ranking_path, class: "btn-link col-10" %>
-  </div>
+  <%= turbo_frame_tag "select_players_num" do %>
+    <div class="row text-center">
+      <%= link_to "もう一度プレイ", select_players_num_path, class: "btn-link col-10" %>
+      <%= link_to "ホームに戻る", root_path, class: "btn-link col-10", data: { turbo: "false" } %>
+      <%= link_to "ランキング", ranking_path, class: "btn-link col-10", data: { turbo: "false" } %>
+    </div>
+  <% end %>
 <% end %>

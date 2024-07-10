@@ -6,6 +6,9 @@ RSpec.describe "Games", type: :system, js: true do
       visit root_path
       click_on "プレイする"
       sleep(1)
+      select "1", from: "player_num"
+      click_on "開始する"
+      sleep(1)
       expect(current_path).to eq game_path
     end
 
@@ -14,6 +17,9 @@ RSpec.describe "Games", type: :system, js: true do
       click_on "ゲストログイン"
       sleep(1)
       click_on "プレイする"
+      sleep(1)
+      select "1", from: "player_num"
+      click_on "開始する"
       sleep(1)
     end
 
@@ -75,6 +81,10 @@ RSpec.describe "Games", type: :system, js: true do
         first(:css, ".calculated_scores").click
       end
       click_on "もう一度プレイ"
+      sleep(1)
+      select "1", from: "player_num"
+      click_on "開始する"
+      sleep(1)
 
       expect(current_path).to eq game_path
       expect(page).not_to have_css(".result")

@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "select_players_num" do %>
+  <%= form_with url: new_game_path, method: :post do |f| %>
+    <%= f.select :player_num, [1, 2, 3, 4], { include_blank: "プレイ人数を選択" }, { class: "select-box" } %>
+    <%= f.submit "開始する", class: "btn-link col-7" %>
+  <% end %>
+  <%= link_to "戻る", root_path, class: "btn-link col-7" %>
+<% end %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>
