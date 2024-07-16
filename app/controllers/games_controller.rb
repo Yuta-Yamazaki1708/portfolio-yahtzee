@@ -17,27 +17,24 @@ class GamesController < ApplicationController
       flash.now.alert = "プレイ人数を選択してください。"
       render "select_players_num", formats: :turbo_stream
     else
-      session[:player_num] = params[:player_num]
-      if user_signed_in?
-        @game = current_user.games.new
-      else
-        @game = Game.new
+      session[:player_num] = params[:player_num].to_i
+      session[:player_num].times do |num|
+        session[:"game#{num}"] = current_user.games.new
+        session[:"game#{num}"].save
       end
-      @game.save
-      session[:game_id] = @game.id
       redirect_to game_path
     end
   end
 
   def game
-    if session[:game_id]
-      @game = Game.find(session[:game_id])
-    else
-      @game = Game.new
-      @game.save
-      session[:game_id] = @game.id
+    unless session[:game0]
+      session[:game0] = Game.new
+      session[:game0].save
     end
-    @categories_and_results = @game.display_results
+    @categories_and_results = []
+    session[:player_num].times do |num|
+      @categories_and_results << Game.find(session[:"game#{num}"]["id"]).display_results
+    end
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
     @calculated_scores = session[:calculated_scores]
@@ -48,8 +45,8 @@ class GamesController < ApplicationController
     session[:table_dices] = Game.roll_dices(dice_num)
     session[:calculated_scores] = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
 
-    @game = Game.find(session[:game_id])
-    @categories_and_results = @game.display_results
+    @game1 = Game.find(session[:game_id1])
+    @categories_and_results = @game1.display_results
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
     @calculated_scores = session[:calculated_scores]
@@ -61,7 +58,7 @@ class GamesController < ApplicationController
     index = params[:index].to_i
     Game.move(session[:table_dices], session[:keep_dices], index)
 
-    @game = Game.find(session[:game_id])
+    @game1 = Game.find(session[:game_id1])
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
   end
@@ -70,16 +67,16 @@ class GamesController < ApplicationController
     index = params[:index].to_i
     Game.move(session[:keep_dices], session[:table_dices], index)
 
-    @game = Game.find(session[:game_id])
+    @game1 = Game.find(session[:game_id1])
     @keep_dices = session[:keep_dices]
     @table_dices = session[:table_dices]
   end
 
   def select_category
-    @game = Game.find(session[:game_id])
-    if @game.update(params[:category] => session[:calculated_scores][params[:category]]) &&
-      @game.update("bonus" => bonus(@game)) &&
-      @game.update("sum" => sum(@game))
+    @game1 = Game.find(session[:game_id1])
+    if @game1.update(params[:category] => session[:calculated_scores][params[:category]]) &&
+      @game1.update("bonus" => bonus(@game1)) &&
+      @game1.update("sum" => sum(@game1))
     else
       flash.now.alert = "エラーが発生しました。"
       session[:turn_count] -= 1
@@ -91,7 +88,7 @@ class GamesController < ApplicationController
 
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
-    @categories_and_results = @game.display_results
+    @categories_and_results = @game1.display_results
     @calculated_scores = session[:calculated_scores]
 
     if session[:turn_count].to_i < TURN_NUM
@@ -127,8 +124,8 @@ class GamesController < ApplicationController
     else
       session[:roll_count] += 1
       flash.now.alert = "サイコロを振れるのは3回までです。"
-      @game = Game.find(session[:game_id])
-      @categories_and_results = @game.display_results
+      @game1 = Game.find(session[:game_id1])
+      @categories_and_results = @game1.display_results
       @calculated_scores = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
       @table_dices = session[:table_dices]
       @keep_dices = session[:keep_dices]
@@ -148,9 +145,8 @@ class GamesController < ApplicationController
   def check_reload
     unless session[:turn_count].nil?
       session[:turn_count] = nil
-      game = Game.find(session[:game_id])
+      game = Game.find(session[:game_id1])
       game.destroy
-      session[:game_id] = nil
       flash.notice = "リロードされたためゲームを中止しました。"
 
       redirect_to root_path
