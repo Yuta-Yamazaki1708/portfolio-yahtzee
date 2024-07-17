@@ -1,6 +1,6 @@
 <%= turbo_stream.update "results" do %>
   <%= render partial: "results",
-    locals: results_locals(@game, @categories_and_results, @calculated_scores)
+    locals: results_locals(@categories_and_results, @calculated_scores)
   %>
 <% end %>
 

@@ -9,13 +9,13 @@
     <% Game::CATEGORIES.each do |category| %>
       <tr>
         <th><%= t "results.#{category}" %></th>
-        <% @categories_and_results.each do |category, result| %>
-          <% if result %>
-            <td class="result"><%= result %></td>
+        <% @categories_and_results.each_with_index do |item, game_index| %>
+          <% if item["#{category}"] %>
+            <td class="result"><%= item["#{category}"] %></td>
           <% elsif calculated_scores[category] %>
             <td>
               <%= link_to calculated_scores[category],
-                select_category_path(select_category_params(category)),
+                select_category_path(select_category_params(game_index, category)),
                 data: { "turbo-method": :patch },
                 class: "calculated_scores"
               %>

@@ -44,9 +44,10 @@ class GamesController < ApplicationController
     dice_num = session[:table_dices].size
     session[:table_dices] = Game.roll_dices(dice_num)
     session[:calculated_scores] = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
-
-    @game1 = Game.find(session[:game_id1])
-    @categories_and_results = @game1.display_results
+    @categories_and_results = []
+    session[:player_num].times do |num|
+      @categories_and_results << Game.find(session[:"game#{num}"]["id"]).display_results
+    end
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
     @calculated_scores = session[:calculated_scores]
@@ -57,8 +58,6 @@ class GamesController < ApplicationController
   def move_to_keep
     index = params[:index].to_i
     Game.move(session[:table_dices], session[:keep_dices], index)
-
-    @game1 = Game.find(session[:game_id1])
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
   end
@@ -66,17 +65,19 @@ class GamesController < ApplicationController
   def move_to_table
     index = params[:index].to_i
     Game.move(session[:keep_dices], session[:table_dices], index)
-
-    @game1 = Game.find(session[:game_id1])
     @keep_dices = session[:keep_dices]
     @table_dices = session[:table_dices]
   end
 
   def select_category
-    @game1 = Game.find(session[:game_id1])
-    if @game1.update(params[:category] => session[:calculated_scores][params[:category]]) &&
-      @game1.update("bonus" => bonus(@game1)) &&
-      @game1.update("sum" => sum(@game1))
+    @games = []
+    session[:player_num].times do |num|
+      @games << Game.find(session[:"game#{num}"]["id"])
+    end
+    game = @games[params[:game].to_i]
+    if game.update(params[:category] => session[:calculated_scores][params[:category]]) &&
+      game.update("bonus" => bonus(game)) &&
+      game.update("sum" => sum(game))
     else
       flash.now.alert = "エラーが発生しました。"
       session[:turn_count] -= 1
@@ -88,7 +89,10 @@ class GamesController < ApplicationController
 
     @table_dices = session[:table_dices]
     @keep_dices = session[:keep_dices]
-    @categories_and_results = @game1.display_results
+    @categories_and_results = []
+    session[:player_num].times do |num|
+      @categories_and_results << Game.find(session[:"game#{num}"]["id"]).display_results
+    end
     @calculated_scores = session[:calculated_scores]
 
     if session[:turn_count].to_i < TURN_NUM
@@ -124,8 +128,10 @@ class GamesController < ApplicationController
     else
       session[:roll_count] += 1
       flash.now.alert = "サイコロを振れるのは3回までです。"
-      @game1 = Game.find(session[:game_id1])
-      @categories_and_results = @game1.display_results
+      @categories_and_results = []
+      session[:player_num].times do |num|
+        @categories_and_results << Game.find(session[:"game#{num}"]["id"]).display_results
+      end
       @calculated_scores = Game.calculate_scores(session[:table_dices] + session[:keep_dices])
       @table_dices = session[:table_dices]
       @keep_dices = session[:keep_dices]
@@ -145,7 +151,7 @@ class GamesController < ApplicationController
   def check_reload
     unless session[:turn_count].nil?
       session[:turn_count] = nil
-      game = Game.find(session[:game_id1])
+      game = Game.find(session[:game0]["id"])
       game.destroy
       flash.notice = "リロードされたためゲームを中止しました。"
 

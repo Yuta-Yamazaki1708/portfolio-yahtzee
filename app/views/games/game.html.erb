@@ -14,14 +14,14 @@
           <h1>ゲーム結果</h1>
           <%= turbo_frame_tag "results" do %>
             <%= render partial: "results",
-              locals: results_locals(@game, @categories_and_results, @calculated_scores)
+              locals: results_locals(@categories_and_results, @calculated_scores)
             %>
           <% end %>
         </div>
         <div class="col-md-6 col-12" data-turbo="true">
           <%= turbo_frame_tag "field" do %>
             <%= render partial: "field",
-              locals: field_locals(@game, @table_dices, @keep_dices)
+              locals: field_locals(@table_dices, @keep_dices)
             %>
           <% end %>
         </div>
