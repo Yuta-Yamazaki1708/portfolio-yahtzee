@@ -2,11 +2,9 @@ class GamesController < ApplicationController
   before_action :init_sessions, only: [:game]
   before_action :check_reload, only: [:game]
   before_action :check_roll_count, only: [:roll_dices]
-  before_action :check_turn_count, only: [:select_category]
-  before_action :check_player_turn, only: [:select_category]
+  before_action :check_turn_count, :check_player_turn, only: [:select_category]
 
   DICE_NUM = 5
-  MAX_ROLL_DICES = 3
   TURN_NUM = Game::CATEGORIES.size - 2
 
   def select_players_num
@@ -17,12 +15,16 @@ class GamesController < ApplicationController
     if params[:player_num].blank?
       flash.now.alert = "プレイ人数を選択してください。"
       render "select_players_num", formats: :turbo_stream
+    elsif params[:times_roll].blank?
+      flash.now.alert = "サイコロを振れる回数を選択してください。"
+      render "select_players_num", formats: :turbo_stream
     else
       session[:player_num] = params[:player_num].to_i
       session[:player_num].times do |num|
         session[:"game#{num}"] = current_user.games.new
         session[:"game#{num}"].save
       end
+      session[:times_roll] = params[:times_roll].to_i
       redirect_to game_path
     end
   end
@@ -108,7 +110,7 @@ class GamesController < ApplicationController
   def get_roll_count
     render json: {
       roll_count: session[:roll_count],
-      max_roll_dices: MAX_ROLL_DICES,
+      max_roll_dices: session[:times_roll],
     }
   end
 
@@ -124,12 +126,12 @@ class GamesController < ApplicationController
 
   # サイコロを振った回数を記録する.
   def check_roll_count
-    if session[:roll_count].to_i < MAX_ROLL_DICES
+    if session[:roll_count].to_i < session[:times_roll]
       session[:roll_count] ||= 0
       session[:roll_count] += 1
     else
       session[:roll_count] += 1
-      flash.now.alert = "サイコロを振れるのは3回までです。"
+      flash.now.alert = "サイコロを振れるのは#{session[:times_roll]}回までです。"
       @categories_and_results = []
       session[:player_num].times do |num|
         @categories_and_results << Game.find(session[:"game#{num}"]["id"]).display_results

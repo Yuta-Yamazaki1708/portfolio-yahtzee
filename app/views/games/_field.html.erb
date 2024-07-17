@@ -29,8 +29,8 @@
   <% end %>
 
   <h3>残り
-  <% if 3 - session[:roll_count].to_i > 0 %>
-    <%= 3 - session[:roll_count].to_i %>
+  <% if session[:times_roll].to_i - session[:roll_count].to_i > 0 %>
+    <%= session[:times_roll].to_i - session[:roll_count].to_i %>
   <% else %>
     <%= 0 %>
   <% end %>

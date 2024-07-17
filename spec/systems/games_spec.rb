@@ -7,8 +7,10 @@ RSpec.describe "Games", type: :system, js: true do
       click_on "プレイする"
       sleep(1)
       select "1", from: "player_num"
+      select "3", from: "times_roll"
       click_on "開始する"
       sleep(1)
+      
       expect(current_path).to eq game_path
     end
 
@@ -19,6 +21,7 @@ RSpec.describe "Games", type: :system, js: true do
       click_on "プレイする"
       sleep(1)
       select "1", from: "player_num"
+      select "3", from: "times_roll"
       click_on "開始する"
       sleep(1)
     end
@@ -83,6 +86,7 @@ RSpec.describe "Games", type: :system, js: true do
       click_on "もう一度プレイ"
       sleep(1)
       select "1", from: "player_num"
+      select "3", from: "times_roll"
       click_on "開始する"
       sleep(1)
 
