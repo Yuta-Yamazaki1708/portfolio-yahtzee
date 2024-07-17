@@ -3,6 +3,7 @@ class GamesController < ApplicationController
   before_action :check_reload, only: [:game]
   before_action :check_roll_count, only: [:roll_dices]
   before_action :check_turn_count, only: [:select_category]
+  before_action :check_player_turn, only: [:select_category]
 
   DICE_NUM = 5
   MAX_ROLL_DICES = 3
@@ -95,7 +96,7 @@ class GamesController < ApplicationController
     end
     @calculated_scores = session[:calculated_scores]
 
-    if session[:turn_count].to_i < TURN_NUM
+    if session[:turn_count].to_i < TURN_NUM * session[:player_num]
       render "select_category", formats: :turbo_stream
     else
       session[:turn_count] = nil
@@ -118,6 +119,7 @@ class GamesController < ApplicationController
     session[:table_dices] = Array.new(DICE_NUM) { 0 }
     session[:keep_dices] = []
     session[:calculated_scores] = {}
+    session[:player_turn] = 0
   end
 
   # サイコロを振った回数を記録する.
@@ -145,6 +147,11 @@ class GamesController < ApplicationController
     session[:turn_count] ||= 0
     session[:turn_count] += 1
     session[:roll_count] = nil
+  end
+
+  # プレイヤーのターンを記録する.
+  def check_player_turn
+    session[:player_turn] = session[:turn_count] % session[:player_num]
   end
 
   # ゲームの途中でリロードされた場合、ゲームを中止してホームへリダイレクト.

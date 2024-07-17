@@ -13,15 +13,19 @@
           <% if item["#{category}"] %>
             <td class="result"><%= item["#{category}"] %></td>
           <% elsif calculated_scores[category] %>
-            <td>
-              <%= link_to calculated_scores[category],
-                select_category_path(select_category_params(game_index, category)),
-                data: { "turbo-method": :patch },
-                class: "calculated_scores"
-              %>
-            </td>
+            <% if session[:player_turn] == game_index %>
+              <td>
+                <%= link_to calculated_scores[category],
+                  select_category_path(select_category_params(game_index, category)),
+                  data: { "turbo-method": :patch },
+                  class: "calculated_scores"
+                %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
           <% else %>
-            <td>0</td>
+            <td></td>
           <% end %>
         <% end %>
       </tr>

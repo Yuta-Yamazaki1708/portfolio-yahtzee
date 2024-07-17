@@ -9,6 +9,7 @@ td a {
 
 .dice-container {
   min-height: 150px;
+  background-color: #e9e8e6;
 }
 
 @keyframes rotate {

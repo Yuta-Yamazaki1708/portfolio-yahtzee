@@ -1,3 +1,4 @@
+<h3 style="color:red">プレイヤー<%= session[:player_turn] + 1 %>のターンです</h3>
 <div class="row justify-content-start dice-container">
   <h3>キープしたサイコロの目</h3>
   <% keep_dices.each_with_index do |num, index| %>
@@ -23,7 +24,7 @@
   <% if table_dices.size > 0 %>
     <%= link_to "サイコロを振る",
       roll_dices_path,
-      class: "btn-link"
+      class: "btn-link col-7 text-center"
     %>
   <% end %>
 
