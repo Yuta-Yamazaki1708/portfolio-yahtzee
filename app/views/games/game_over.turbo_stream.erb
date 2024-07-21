@@ -5,6 +5,13 @@
 <% end %>
 
 <%= turbo_stream.replace "field" do %>
+  <div class="row text-center">
+    <%= turbo_frame_tag "post" do %>
+        <%= link_to "結果を投稿する", new_post_path, class: "btn-link col-10" %>
+    <% end %>
+  </div>
+  
+
   <%= turbo_frame_tag "select_players_num" do %>
     <div class="row text-center">
       <%= link_to "もう一度プレイ", select_players_num_path, class: "btn-link col-10" %>

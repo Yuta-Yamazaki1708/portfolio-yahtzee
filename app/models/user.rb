@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :games, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   has_one_attached :icon do |attachable|
     attachable.variant :thumb, resize_to_fill: [50, 50]

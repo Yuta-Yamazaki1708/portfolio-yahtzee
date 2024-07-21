@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get "/ranking", to: "ranks#all", as: "ranking"
   get "/ranking/weekly", to: "ranks#weekly", as: "weekly_ranking"
   get "/rules", to: "rules#index", as: "rules"
+  get "posts", to: "posts#new", as: "new_post"
+  post "posts", to: "posts#create", as: "post"
 end

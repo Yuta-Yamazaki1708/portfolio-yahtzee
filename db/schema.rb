@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_061732) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_20_060246) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_061732) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
+  create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.integer "point"
+    t.index ["game_id"], name: "index_posts_on_game_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -78,4 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_061732) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "games", "users"
+  add_foreign_key "posts", "games"
+  add_foreign_key "posts", "users"
 end

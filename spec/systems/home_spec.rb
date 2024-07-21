@@ -69,6 +69,8 @@ RSpec.describe "Homes", type: :system, js: true do
       sleep(1)
       select '1', from: 'player_num'
       sleep(1)
+      select '3', from: 'times_roll'
+      sleep(1)
       click_on "開始する"
       sleep(1)
     end
