@@ -29,7 +29,7 @@
 }
 
 .scroll {
-  width: 700px;
+  width: auto;
   height: 200px;
   overflow: auto;
   background-color: #fff;

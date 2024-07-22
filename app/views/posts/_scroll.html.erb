@@ -10,7 +10,8 @@
                 <td data-turbo="false"><p><%= link_to "#{post.user.username}", profile_path(post.user) %></p></td>
               <% end %>
               <td data-turbo="false"><p><%= link_to "#{post.game.display_results["sum"]}点", result_path(post.game) %></p></td>
-              <td><p><%= "#{post.comment}" %></p></td>
+              <td><p><%= post.comment %></p></td>
+              <td><p><%= l post.created_at %></p></td>
               <% if post.user == current_user %>
                 <td><%= link_to "削除", delete_post_path(post), data: { turbo_method: :delete, turbo_confirm: "投稿を削除してもよろしいですか？" } %></td>
               <% end %>
