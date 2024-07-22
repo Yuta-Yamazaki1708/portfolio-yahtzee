@@ -10,11 +10,14 @@
         <%= link_to "ログイン", new_user_session_path, class: "btn-link col-7" %>
         <%= link_to "ゲストログイン", guest_sign_in_path, data: {"turbo-method": :post}, class: "btn-link col-7" %>
         <%= link_to "新規登録", new_user_registration_path, class: "btn-link col-7" %>
+      <% else %>
+        <%= turbo_frame_tag "select_players_num" do %>
+          <%= link_to "プレイする", select_players_num_path, class: "btn-link col-7" %>
+          <%= link_to "ルール", rules_path, class: "btn-link col-7", data: { turbo: "false" } %>
+          <%= link_to "ランキング", ranking_path, class: "btn-link col-7", data: { turbo: "false" } %>
+        <% end %>
+        <%= render partial: "posts/scroll", locals: {posts: @posts} %>
       <% end %>
-      <%= link_to "プレイする", new_game_path , class: "btn-link col-7", data: {"turbo-method": :post} %>
-      <%= link_to "ルール", rules_path, class: "btn-link col-7" %>
-      <%= link_to "ランキング", ranking_path, class: "btn-link col-7" %>
     </div>
   </div>
 </section>
-

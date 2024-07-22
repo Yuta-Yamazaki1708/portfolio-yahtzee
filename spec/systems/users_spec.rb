@@ -279,6 +279,14 @@ RSpec.describe "Users", type: :system, js: true do
       expect(page.text).to match %r{#{game2.sum}[\s\S]*#{game3.sum}[\s\S]*#{game1.sum}}
       expect(page).to have_content "合計⌄"
     end
+
+    it "ゲーム結果を削除できること" do
+      click_on("削除", match: :first)
+      sleep 1
+      page.accept_confirm
+      sleep 1
+      expect(page).to have_content "結果を削除しました。"
+    end
   end
 
   describe "ページネーションテスト" do

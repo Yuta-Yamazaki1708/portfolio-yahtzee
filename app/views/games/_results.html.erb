@@ -1,20 +1,32 @@
 <table class="table table-hover table-responsive">
   <tbody>
-    <% categories_and_results.each do |category, result| %>
+    <tr>
+      <th></th>
+      <% session[:player_num].times do |num| %>
+        <td>プレイヤー<%= num + 1 %></td>
+      <% end %>
+    </tr>
+    <% Game::CATEGORIES.each do |category| %>
       <tr>
-        <th scope="row"><%= t "results.#{category}" %></th>
-        <% if result %>
-          <td colspan="2" class="result"><%= result %></td>
-        <% elsif calculated_scores[category] %>
-          <td colspan="2">
-            <%= link_to calculated_scores[category],
-              select_category_path(select_category_params(category)),
-              data: { "turbo-method": :patch },
-              class: "calculated_scores"
-            %>
-          </td>
-        <% else %>
-          <td colspan="2">0</td>
+        <th><%= t "results.#{category}" %></th>
+        <% @categories_and_results.each_with_index do |item, game_index| %>
+          <% if item["#{category}"] %>
+            <td class="result"><%= item["#{category}"] %></td>
+          <% elsif calculated_scores[category] %>
+            <% if session[:player_turn] == game_index %>
+              <td>
+                <%= link_to calculated_scores[category],
+                  select_category_path(select_category_params(game_index, category)),
+                  data: { "turbo-method": :patch },
+                  class: "calculated_scores"
+                %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+          <% else %>
+            <td></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

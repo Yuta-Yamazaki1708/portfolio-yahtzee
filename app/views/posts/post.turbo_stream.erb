@@ -1,0 +1,4 @@
+
+<%= turbo_stream.remove "#{session[:post_num]}" %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

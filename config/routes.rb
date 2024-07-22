@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/user/profile/:id", to: "users/mypages#show", as: "profile"
   get "/user/edit_profile", to: "users/mypages#edit", as: "edit_profile"
   patch "user/update_profile", to: "users/mypages#update", as: "update_profile"
+  get "/select_players_num", to: "games#select_players_num", as: "select_players_num"
   post "/new_game", to: "games#new_game", as: "new_game"
   get "/game", to: "games#game", as: "game"
   get "/roll_dices", to: "games#roll_dices", as: "roll_dices"
@@ -26,4 +27,7 @@ Rails.application.routes.draw do
   get "/ranking", to: "ranks#all", as: "ranking"
   get "/ranking/weekly", to: "ranks#weekly", as: "weekly_ranking"
   get "/rules", to: "rules#index", as: "rules"
+  get "posts", to: "posts#new", as: "new_post"
+  post "posts", to: "posts#create", as: "post"
+  delete "/delete_post/:id", to: "posts#destroy", as: "delete_post"
 end

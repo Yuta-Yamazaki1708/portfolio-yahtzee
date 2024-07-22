@@ -33,6 +33,8 @@ class Users::MypagesController < ApplicationController
 
   def ensure_guest_user
     @user = current_user
+    @number_of_play = @user.games.count
+    @max_point = @user.games.maximum(:sum)
     if @user.email == "guest@example.com"
       flash.now.alert = "ゲストユーザーは編集、退会ができません。"
       render "ensure_guest_user", formats: :turbo_stream

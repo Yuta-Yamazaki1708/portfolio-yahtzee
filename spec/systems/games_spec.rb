@@ -6,12 +6,23 @@ RSpec.describe "Games", type: :system, js: true do
       visit root_path
       click_on "プレイする"
       sleep(1)
+      select "1", from: "player_num"
+      select "3", from: "times_roll"
+      click_on "開始する"
+      sleep(1)
+
       expect(current_path).to eq game_path
     end
 
     before do
       visit root_path
+      click_on "ゲストログイン"
+      sleep(1)
       click_on "プレイする"
+      sleep(1)
+      select "1", from: "player_num"
+      select "3", from: "times_roll"
+      click_on "開始する"
       sleep(1)
     end
 
@@ -21,7 +32,7 @@ RSpec.describe "Games", type: :system, js: true do
       expect(page).to have_content("残り 2 回振れます")
     end
 
-    it "サイコロを4回振れないこと" do
+    it "サイコロを3回振れる選択の場合、サイコロを4回振れないこと" do
       4.times { click_on "サイコロを振る" }
       expect(page).to have_content("サイコロを振れるのは3回までです。")
     end
@@ -73,6 +84,11 @@ RSpec.describe "Games", type: :system, js: true do
         first(:css, ".calculated_scores").click
       end
       click_on "もう一度プレイ"
+      sleep(1)
+      select "1", from: "player_num"
+      select "3", from: "times_roll"
+      click_on "開始する"
+      sleep(1)
 
       expect(current_path).to eq game_path
       expect(page).not_to have_css(".result")
@@ -113,6 +129,35 @@ RSpec.describe "Games", type: :system, js: true do
 
       expect(current_path).to eq root_path
       expect(page).to have_content("リロードされたためゲームを中止しました。")
+    end
+
+    it "4人プレイができること" do
+      visit root_path
+      click_on "プレイする"
+      sleep(1)
+      select "4", from: "player_num"
+      select "3", from: "times_roll"
+      click_on "開始する"
+      sleep(1)
+      48.times do
+        click_on "サイコロを振る"
+        first(:css, ".calculated_scores").click
+      end
+
+      expect(page).to have_content("もう一度プレイ")
+      expect(page).to have_content("ホームに戻る")
+    end
+
+    it "サイコロを5回振れる選択の場合、サイコロを６回振ないこと" do
+      visit root_path
+      click_on "プレイする"
+      sleep(1)
+      select "1", from: "player_num"
+      select "5", from: "times_roll"
+      click_on "開始する"
+      sleep(1)
+      6.times { click_on "サイコロを振る" }
+      expect(page).to have_content("サイコロを振れるのは5回までです。")
     end
   end
 end

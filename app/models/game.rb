@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :user, optional: true
+  has_one :post, dependent: :destroy
 
   validates :one, inclusion: { in: [nil, 0, 1, 2, 3, 4, 5] }
   validates :two, inclusion: { in: [nil, 0, 2, 4, 6, 8, 10] }

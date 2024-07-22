@@ -1,13 +1,22 @@
 <%= turbo_stream.update "results" do %>
   <%= render partial: "results",
-    locals: results_locals(@game, @categories_and_results, @calculated_scores)
+    locals: results_locals(@categories_and_results, @calculated_scores)
   %>
 <% end %>
 
 <%= turbo_stream.replace "field" do %>
-  <div class="row text-center">
-    <%= link_to "もう一度プレイ", new_game_path, data: { "turbo-method": :post }, class: "btn-link col-10" %>
-    <%= link_to "ホームに戻る", root_path, class: "btn-link col-10" %>
-    <%= link_to "ランキング", ranking_path, class: "btn-link col-10" %>
-  </div>
+  <%= turbo_frame_tag "post" do %>
+    <div class="row text-center">
+        <%= link_to "結果を投稿する", new_post_path, class: "btn-link col-10" %>
+    </div>
+  <% end %>
+  
+
+  <%= turbo_frame_tag "select_players_num" do %>
+    <div class="row text-center">
+      <%= link_to "もう一度プレイ", select_players_num_path, class: "btn-link col-10" %>
+      <%= link_to "ホームに戻る", root_path, class: "btn-link col-10", data: { turbo: "false" } %>
+      <%= link_to "ランキング", ranking_path, class: "btn-link col-10", data: { turbo: "false" } %>
+    </div>
+  <% end %>
 <% end %>
