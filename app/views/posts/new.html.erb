@@ -1,19 +1,25 @@
 <%= turbo_frame_tag "post" do %>
-  <% session[:player_num].times do |num| %>
-    <%= turbo_frame_tag "#{num}" do %>
-      <%= form_with model: @posts[num], url: post_path(post_num: num), method: :post do |f| %>
-        <%= f.label "点数" %>
-        <%= f.number_field :point, value: @games[num].display_results["sum"], readonly: true %>
+  <div class="row text-center">
+    <% session[:player_num].times do |num| %>
+      <%= turbo_frame_tag "#{num}" do %>
+        <%= form_with model: @posts[num], url: post_path(post_num: num), method: :post do |f| %>
+          <%= f.label "点数" %>
+          <%= f.number_field :point, value: @games[num].display_results["sum"], readonly: true, class: "form-control col-6" %>
 
-        <%= f.label "コメント" %>
-        <%= f.text_field :comment, placeholder: "コメント" %>
+          <%= f.label "コメント" %>
+          <%= f.text_field :comment, class: "form-control col-6" %>
 
-        <%= f.hidden_field :game_id, value: @games[num].id %>
+          <%= f.hidden_field :game_id, value: @games[num].id %>
 
-        <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
 
-        <%= f.submit "投稿する" %>
+          <%= f.submit "投稿する", class: "submit-btn" %>
+
+          <% if @posts[num].errors.include?(:comment) %>
+            <p style="color: red;"><%= @posts[num].errors.where(:comment).first.full_message %></p>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

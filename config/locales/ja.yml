@@ -1,6 +1,8 @@
 ja:
   activerecord:
     attributes:
+      post:
+        comment: コメント
       user:
         username: アカウント名
         icon: アイコン

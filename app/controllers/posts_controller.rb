@@ -20,8 +20,7 @@ class PostsController < ApplicationController
       flash.now.notice = "結果を投稿しました。"
       render "post", formats: :turbo_stream
     else
-      flash.now.alert = "結果の投稿に失敗しました。"
-      render "post", formats: :turbo_stream
+      render "new"
     end
   end
 
