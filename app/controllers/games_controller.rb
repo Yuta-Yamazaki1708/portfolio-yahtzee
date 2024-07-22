@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :init_sessions, only: [:game]
   before_action :check_reload, only: [:game]
   before_action :check_roll_count, only: [:roll_dices]
