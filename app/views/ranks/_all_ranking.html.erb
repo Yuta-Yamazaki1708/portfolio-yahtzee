@@ -18,7 +18,7 @@
           <th scope="row"><%= i + (current_page - 1) * 10 %></th>
           <% if rank.user %>
             <td data-turbo="false">
-              <%= image_tag(current_user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %>
+              <%= image_tag(rank.user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %>
               <%= link_to rank.user.username, profile_path(rank.user) %>
             </td>
           <% else %>
