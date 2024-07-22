@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "scroll" do %>
+    <div class="scroll justify-content-center">
+      <h2>最近のプレイ</h2>
+      <table class="table table-hover table-responsive">
+        <tbody>
+          <% posts.each do |post| %>
+            <tr>
+              <% if post.user && post.game %>
+                <td><%= image_tag(current_user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %></td>
+                <td><p><%= link_to "#{post.user.username}", profile_path(post.user) %></p></td>
+              <% end %>
+              <td><p><%= link_to "#{post.game.display_results["sum"]}点", result_path(post.game) %></p></td>
+              <td><p><%= "#{post.comment}" %></p></td>
+              <% if post.user == current_user %>
+                <td><%= link_to "削除", delete_post_path(post), data: { turbo_method: :delete, turbo_confirm: "投稿を削除してもよろしいですか？" } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>

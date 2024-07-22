@@ -16,16 +16,7 @@
           <%= link_to "ルール", rules_path, class: "btn-link col-7", data: { turbo: "false" } %>
           <%= link_to "ランキング", ranking_path, class: "btn-link col-7", data: { turbo: "false" } %>
         <% end %>
-        <div class="scroll">
-          <h1>最近のプレイ</h1>
-          <% @posts.each do |post| %>
-            <% if post.user && post.game %>
-              <p><%= link_to "#{post.user.username}さん", profile_path(post.user) %></p>
-            <% end %>
-            <p><%= link_to "#{post.game.display_results["sum"]}点", result_path(post.game) %></p>
-            <p><%= "#{post.comment}" %></p>
-          <% end %>
-        </div>
+        <%= render partial: "posts/scroll", locals: {posts: @posts} %>
       <% end %>
     </div>
   </div>

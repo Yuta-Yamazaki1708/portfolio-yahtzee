@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   get "/rules", to: "rules#index", as: "rules"
   get "posts", to: "posts#new", as: "new_post"
   post "posts", to: "posts#create", as: "post"
+  delete "/delete_post/:id", to: "posts#destroy", as: "delete_post"
 end

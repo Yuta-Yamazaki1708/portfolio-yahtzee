@@ -29,10 +29,11 @@
 }
 
 .scroll {
-  width: 500px;
+  width: 700px;
   height: 200px;
   overflow: auto;
   background-color: #fff;
+  border-radius: 20px;
 }
 
 @media (max-width: 992px) {

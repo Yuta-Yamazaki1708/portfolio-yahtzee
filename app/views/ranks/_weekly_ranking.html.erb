@@ -18,11 +18,14 @@
         <tr>
           <th scope="row"><%= i + ( current_page - 1) * 10 %></th>
           <% if rank.user %>
-            <td data-turbo="false"><%= link_to rank.user.username, profile_path(rank.user) %></td>
+            <td data-turbo="false">
+              <%= image_tag(current_user.icon.variant(:thumb), class: "icon", id: "icon", alt: "アイコン") %>
+              <%= link_to rank.user.username, profile_path(rank.user) %>
+            </td>
           <% else %>
             <td></td>
           <% end %>
-          <td><%= rank.sum %></td>
+          <td><%= rank.sum %>点</td>
           <td data-turbo="false"><%= link_to "詳細", result_path(rank) %></td>
         </tr>
       <% end %>

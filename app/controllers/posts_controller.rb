@@ -24,6 +24,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @posts = Post.all.limit(20).order("id DESC").includes(:user, :game)
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash.now.notice = "投稿を削除しました。"
+    render "destroy", formats: :turbo_stream
+  end
+
   private
 
   def post_params

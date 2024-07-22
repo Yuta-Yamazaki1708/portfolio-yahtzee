@@ -1,0 +1,5 @@
+<%= turbo_stream.update "scroll" do %>
+  <%= render partial: "posts/scroll", locals: {posts: @posts} %>
+<% end %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>
