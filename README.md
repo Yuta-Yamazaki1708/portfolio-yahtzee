@@ -86,4 +86,5 @@ https://mysterious-lake-40470-e4ed147a9865.herokuapp.com/rules
 
 # 今後の課題
 railsのAction Mairerを使用し、メールアドレスの確認機能を実装する必要があります。
+
 また、herokuへのデプロイはリージョンが日本にないので動作が遅くなりがちです。特にturboを使用したアプリはこのレイテンシの影響を大きく受けるので、デプロイ先をAWSに変更するのが今後の課題です。
