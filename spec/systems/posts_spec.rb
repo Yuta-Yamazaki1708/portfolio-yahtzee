@@ -38,13 +38,13 @@ RSpec.describe "Posts", type: :system, js: true do
     end
 
     it "ユーザープロフィールを閲覧できること" do
-      click_on ("test")
+      click_on("test")
       sleep 1
       expect(current_path).to eq profile_path(user)
     end
 
     it "ゲーム結果を閲覧できること" do
-      click_on (100)
+      click_on(100)
       sleep 1
       expect(current_path).to eq result_path(game)
     end
