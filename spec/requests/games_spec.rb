@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Games", type: :request do
   describe "GET /get_roll_count" do
+    let(:user) { build(:user) }
     before do
+      sign_in user
       get "/get_roll_count"
     end
 
